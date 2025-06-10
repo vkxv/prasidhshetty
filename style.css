@@ -1,0 +1,6503 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #A259FF;
+    --secondary-color: #A259FF;
+    --text-color: #f4f4f4;
+    --bg-color: #101015;
+    --accent-color: #A259FF;
+    --transition: all 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background: linear-gradient(135deg, #101015 0%, #101015 60%, #131318 100%);
+    min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 32px;
+  box-shadow:
+    0 0 180px 48px #fff,
+    0 0 220px 64px #A259FF88 inset;
+  opacity: 0.38;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Header and Navigation */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(24, 27, 42, 0.98);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    transition: background 0.35s cubic-bezier(.4,0,.2,1);
+}
+header::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #A259FF 0%, #fff 100%);
+    box-shadow: 0 0 18px 2px #A259FF66, 0 0 32px 4px #fff2;
+    border-radius: 2px;
+    z-index: 1001;
+    transition: background 0.4s cubic-bezier(.4,0,.2,1), height 0.4s, border-radius 0.4s, clip-path 0.4s, filter 0.4s;
+    clip-path: none;
+    filter: blur(0.5px);
+}
+header.header-transparent::after {
+    background: linear-gradient(90deg, #A259FF 0%, #fff 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 4px;
+    left: 0;
+    right: 0;
+    border-radius: 2px;
+    box-shadow: 0 0 18px 2px #A259FF66, 0 0 32px 4px #fff2;
+    filter: blur(0.5px);
+}
+
+/* Transparent navbar on scroll */
+header.header-transparent {
+    background: rgba(24, 27, 42, 0.10) !important;
+    box-shadow: none;
+    backdrop-filter: blur(3px) !important;
+}
+
+/* Ensure nav text stays fully opaque */
+header, header * {
+    color: inherit;
+}
+header .main-nav a, header .ps-logo {
+    opacity: 1 !important;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+.ps-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2.5rem;
+    margin-left: 1.2rem;
+    z-index: 1002;
+    opacity: 0;
+    animation: logo-circle-out 1s cubic-bezier(.4,0,.2,1) 0.1s forwards;
+}
+
+.ps-logo.animated {
+    animation: logo-circle-out 1s cubic-bezier(.4,0,.2,1) 0.1s forwards;
+}
+
+.ps-logo svg {
+    display: block;
+    width: 64px;
+    height: 64px;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 0 2rem 0;
+    background: url('polygon-bg.jpg') center center/cover no-repeat, linear-gradient(135deg, #101117 0%, #181b2a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(120deg, rgba(0,255,153,0.08) 0%, rgba(0,234,255,0.08) 100%), rgba(16,17,23,0.88);
+    z-index: 0;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+        radial-gradient(circle at 0% 0%, #A259FF33 0%, transparent 40%),
+        radial-gradient(circle at 100% 0%, #A259FF33 0%, transparent 40%),
+        radial-gradient(circle at 0% 100%, #A259FF33 0%, transparent 40%),
+        radial-gradient(circle at 100% 100%, #A259FF33 0%, transparent 40%);
+    opacity: 0.7;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.welcome-text {
+    margin-top: 0.2rem;
+    margin-bottom: 2.2rem;
+    font-size: 2.8rem;
+    color: rgba(162, 89, 255, 0.08);
+    font-weight: 900;
+    letter-spacing: 3px;
+    opacity: 0;
+    z-index: 1001;
+    text-align: left;
+    line-height: 1.1;
+    display: inline-block;
+    width: 2.2em;
+    white-space: nowrap;
+    -webkit-text-stroke: 2.5px #A259FF;
+    text-stroke: 2.5px #A259FF;
+    text-shadow: 0 0 12px #A259FF99, 0 0 2px #A259FF;
+    animation: fade-slide-up 0.8s cubic-bezier(.4,0,.2,1) forwards;
+    animation-delay: 0.5s;
+}
+
+.hero-name {
+    font-size: 6rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    letter-spacing: 1.5px;
+    color: #fff;
+    line-height: 1.05;
+    text-align: left;
+    width: 100%;
+    max-width: 900px;
+    opacity: 0;
+    animation: fade-slide-up 0.8s cubic-bezier(.4,0,.2,1) forwards;
+    animation-delay: 0.7s;
+}
+
+.hero-name .first-name {
+    font-weight: 400;
+    color: #fff;
+    font-size: 6rem;
+    line-height: 1.05;
+}
+
+.hero-name .last-name {
+    display: block;
+    font-weight: 900;
+    color: var(--primary-color);
+    font-size: 4.2rem;
+    letter-spacing: 2.5px;
+    text-shadow: 0 2px 40px #A259FF55;
+    margin-top: 0.1em;
+    line-height: 1.05;
+}
+
+.hero-title {
+    font-size: 2.2rem;
+    color: #bdbdbd;
+    font-weight: 400;
+    letter-spacing: 0.35rem;
+    margin-bottom: 2.2rem;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    font-family: 'Poppins', Arial, sans-serif;
+    text-align: left;
+    width: 100%;
+    max-width: 900px;
+    opacity: 0;
+    animation: fade-slide-up 0.8s cubic-bezier(.4,0,.2,1) forwards;
+    animation-delay: 0.9s;
+}
+
+.cta-outline {
+    display: inline-block;
+    padding: 1.2rem 3.2rem;
+    border: 2.5px solid #fff;
+    color: #fff;
+    background: transparent;
+    border-radius: 32px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 1.2px;
+    transition: all 0.2s cubic-bezier(.4,0,.2,1);
+    margin-top: 2.2rem;
+    box-shadow: none;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0;
+    animation: fade-slide-up 0.8s cubic-bezier(.4,0,.2,1) 1.1s forwards, button-glow-once 1.2s cubic-bezier(.4,0,.2,1) 2s 1;
+}
+
+/* Remove old cta-primary style for hero button */
+.cta-primary { display: none !important; }
+
+.hero-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mac-laptop {
+    width: 480px;
+    height: 320px;
+    max-width: 100%;
+    display: block;
+    filter: drop-shadow(0 8px 40px #00ff9977);
+}
+
+.hero-social-bottom {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: absolute;
+    left: 0;
+    bottom: 1.2rem;
+    z-index: 2;
+}
+
+.hero-social-bottom .social-icons {
+    display: flex;
+    gap: 7rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-social-bottom .social-icons a {
+    color: var(--primary-color);
+    transition: var(--transition);
+    font-size: 2.8rem;
+    opacity: 0;
+    transform: scale(0.2);
+    animation: icon-scale-in 0.7s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+.hero-social-bottom .social-icons a:hover {
+    color: var(--secondary-color);
+    transform: scale(1.18);
+}
+
+.hero-social-bottom .social-icons a:nth-child(1) { animation-delay: 2.7s; }
+.hero-social-bottom .social-icons a:nth-child(2) { animation-delay: 2.9s; }
+.hero-social-bottom .social-icons a:nth-child(3) { animation-delay: 3.1s; }
+.hero-social-bottom .social-icons a:nth-child(4) { animation-delay: 3.3s; }
+
+/* About Section */
+.about {
+    padding: 6rem 0;
+    background-color: var(--secondary-bg);
+}
+
+.about h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.skills {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.skills h3 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.skills ul {
+    list-style: none;
+}
+
+.skills li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.skills li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+/* Contact Section */
+.contact {
+    padding: 6rem 0;
+    background-color: var(--secondary-bg);
+}
+
+.contact h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-group textarea {
+    min-height: 220px; /* Increased from 120px to 220px for more depth */
+    resize: vertical;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    color: var(--bg-color);
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.submit-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 255, 157, 0.3);
+}
+
+/* Footer */
+footer {
+    padding: 2rem 0;
+    text-align: center;
+    background-color: var(--bg-color);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
+    .hero .container {
+        gap: 2.5rem;
+    }
+    .monitor-svg {
+        max-width: 480px;
+    }
+    .hero-name {
+        font-size: 3.2rem;
+        max-width: 100vw;
+    }
+    .hero-name .first-name {
+        font-size: 3.2rem;
+    }
+    .hero-name .last-name {
+        font-size: 2.5rem;
+    }
+    .welcome-text {
+        font-size: 2.5rem;
+    }
+    .hero-title {
+        font-size: 1.2rem;
+        max-width: 100vw;
+    }
+}
+
+@media (max-width: 900px) {
+    .hero .container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+        justify-items: center;
+    }
+    .hero-content, .hero-image {
+        margin: 0 auto;
+    }
+    .hero-image {
+        margin-top: 2.5rem;
+    }
+    .monitor-svg {
+        max-width: 98vw;
+        margin: 2rem auto 0 auto;
+    }
+    .hero-social-bottom {
+        bottom: 0.5rem;
+    }
+    .welcome-text, .hero-name, .hero-title {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .ps-logo {
+        margin-right: 1.2rem;
+        margin-left: 0.5rem;
+    }
+    .ps-logo svg {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-name {
+        font-size: 1.5rem;
+    }
+    .hero-name .first-name {
+        font-size: 1.5rem;
+    }
+    .hero-name .last-name {
+        font-size: 1.1rem;
+    }
+    .hero-title {
+        font-size: 0.9rem;
+    }
+    .monitor-svg {
+        width: 98vw;
+        height: auto;
+        max-width: 98vw;
+    }
+    .container {
+        padding: 0 0.5rem;
+    }
+    .welcome-text {
+        font-size: 1.1rem;
+    }
+    .hero-social-bottom .social-icons {
+        gap: 1.5rem;
+    }
+    .ps-logo svg {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+#hero-bg-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+
+.monitor-svg {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    min-width: 350px;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    opacity: 0;
+    animation: monitor-in 1.1s cubic-bezier(.4,0,.2,1) 1.3s forwards;
+}
+
+/* --- HERO INTRO ANIMATIONS --- */
+@keyframes logo-circle-out {
+  0% { transform: scale(0.2); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade-slide-up {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes button-glow-once {
+  0% { box-shadow: 0 0 0 0 #A259FF55; }
+  60% { box-shadow: 0 0 32px 12px #A259FF99; }
+  100% { box-shadow: 0 0 0 0 #A259FF00; }
+}
+
+@keyframes monitor-in {
+  0% { opacity: 0; transform: scale(0.8) translateY(60px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Add animation-fill-mode: forwards to all entrance animations */
+.welcome-text.animated,
+.hero-name.animated,
+.hero-title.animated,
+.monitor-heading-anim.animated,
+.monitor-typing.animated,
+.cta-outline.animated,
+.ps-logo.animated,
+.about-title.animated,
+.about-description.animated,
+.about-email.animated,
+.about-geo-structure.animated,
+.skills-title.animated,
+.skill-card.animated,
+.what-i-do-title-main.animated,
+.what-i-do-title-reflection.animated,
+.featured-works-title.animated,
+.project-card.fw-animate-in,
+.project-detail-title.animated,
+.back-to-featured-btn.animated,
+.contact-title.animated,
+.contact-message.animated,
+.contact-left.animated,
+.contact-right.animated {
+  animation-fill-mode: forwards !important;
+}
+
+/* Monitor heading and typing effect */
+@keyframes heading-slide-down {
+  0% { opacity: 0; transform: translateY(-40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.monitor-heading-anim {
+  opacity: 0;
+  animation: heading-slide-down 0.7s cubic-bezier(.4,0,.2,1) 2.1s forwards;
+}
+
+.monitor-typing {
+  opacity: 0;
+  animation: fade-slide-up 0.5s cubic-bezier(.4,0,.2,1) 2.5s forwards;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  white-space: pre-line;
+  min-height: 2.5em;
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 1ch;
+  background: none;
+  color: #fff;
+  animation: blink-cursor 0.7s steps(1) infinite;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes icon-scale-in {
+  0% { opacity: 0; transform: scale(0.2); }
+  80% { opacity: 1; transform: scale(1.15); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.about-section {
+    width: 100vw;
+    min-height: 100vh;
+    background: #181b2a;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+}
+
+.about-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: 100vh;
+}
+
+.about-content {
+    max-width: 540px;
+    color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+    margin-top: 2.5rem;
+}
+
+.about-title {
+    font-size: 2.3rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    color: #fff;
+    margin-bottom: 0.2em;
+    border-bottom: 3px solid #A259FF;
+    display: inline-block;
+    padding-bottom: 0.1em;
+    opacity: 0;
+    animation: about-title-anim 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.about-name {
+    font-size: 1.1rem;
+    color: #A259FF;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 0.5em;
+}
+
+.about-description {
+    font-size: 1.15rem;
+    color: #e0e0e0;
+    line-height: 1.7;
+    font-weight: 400;
+    margin-bottom: 2.5em;
+    opacity: 0;
+    animation: about-text-anim 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.3s;
+}
+
+.about-email {
+    font-size: 1.05rem;
+    color: #A259FF;
+    font-weight: 500;
+    margin-top: 2.5em;
+    letter-spacing: 0.5px;
+    padding: 1em 2em;
+    border-radius: 50px;
+    position: relative;
+    display: inline-block;
+    background: rgba(162, 89, 255, 0.08);
+    border: 2px solid rgba(162, 89, 255, 0.3);
+    box-shadow: 0 0 25px rgba(162, 89, 255, 0.2),
+                inset 0 0 25px rgba(162, 89, 255, 0.15);
+    transition: all 0.3s ease;
+    animation: email-glow 1.5s ease-out forwards;
+    animation-delay: 0.6s;
+}
+
+.about-email:hover {
+    box-shadow: 0 0 35px rgba(162, 89, 255, 0.3),
+                inset 0 0 35px rgba(162, 89, 255, 0.2);
+    border-color: rgba(162, 89, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.about-email::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 50px;
+    background: linear-gradient(45deg, 
+        rgba(162, 89, 255, 0.15),
+        rgba(162, 89, 255, 0.3),
+        rgba(162, 89, 255, 0.15));
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.about-email:hover::before {
+    opacity: 1;
+}
+
+@keyframes email-glow {
+    0% {
+        box-shadow: 0 0 5px rgba(162, 89, 255, 0.1),
+                    inset 0 0 5px rgba(162, 89, 255, 0.1);
+        border-color: rgba(162, 89, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 35px rgba(162, 89, 255, 0.3),
+                    inset 0 0 35px rgba(162, 89, 255, 0.2);
+        border-color: rgba(162, 89, 255, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 25px rgba(162, 89, 255, 0.2),
+                    inset 0 0 25px rgba(162, 89, 255, 0.15);
+        border-color: rgba(162, 89, 255, 0.3);
+    }
+}
+
+.about-highlight {
+    color: #A259FF;
+    font-weight: 700;
+    font-size: 1.18em;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 900px) {
+    .about-container {
+        padding: 0 1.2rem;
+        min-height: 70vh;
+    }
+    .about-content {
+        max-width: 100vw;
+        gap: 1.5rem;
+    }
+}
+@media (max-width: 600px) {
+    .about-title {
+        font-size: 1.3rem;
+    }
+    .about-name {
+        font-size: 0.95rem;
+    }
+    .about-description {
+        font-size: 0.98rem;
+    }
+    .about-email {
+        font-size: 0.9rem;
+    }
+}
+
+.about-geo-structure {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    opacity: 0;
+    animation: sphere-entrance 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.4s;
+}
+
+#sphere-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.geo-structure-svg {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    opacity: 0.7;
+}
+
+.about-section {
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 900px) {
+    .about-geo-structure {
+        width: 100vw;
+        height: 40vh;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transform: none;
+        justify-content: center;
+        opacity: 0.4;
+    }
+    .geo-structure-svg {
+        max-width: 90vw;
+        max-height: 40vh;
+    }
+}
+@media (max-width: 600px) {
+    .about-geo-structure {
+        display: none;
+    }
+}
+
+.geo-3d-rotator {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 1/1;
+  margin: 0 auto;
+  perspective: 1200px;
+  z-index: 1;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.geo-3d-group {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: box-shadow 0.2s;
+  cursor: grab;
+}
+.geo-3d-group:active {
+  cursor: grabbing;
+  box-shadow: 0 0 32px 0 #a259ff44;
+}
+.geo-structure-svg,
+.geo-structure-svg-rotated {
+  width: 100%;
+  height: auto;
+  max-width: 520px;
+  max-height: 520px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.geo-structure-svg-rotated {
+  /* 3D rotation handled by JS, but keep stacking */
+  z-index: 2;
+}
+@media (max-width: 700px) {
+  .geo-3d-rotator {
+    max-width: 320px;
+    min-height: 180px;
+  }
+  .geo-structure-svg,
+  .geo-structure-svg-rotated {
+    max-width: 320px;
+    max-height: 320px;
+  }
+}
+
+/* About Section Animations */
+@keyframes about-title-anim {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+        border-bottom-width: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+        border-bottom-width: 3px;
+    }
+}
+
+@keyframes about-text-anim {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes about-email-anim {
+    0% {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes sphere-entrance {
+    0% {
+        transform: scale(0.3) rotate(180deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Add animation classes */
+.about-title {
+    opacity: 0;
+    animation: about-title-anim 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.about-description {
+    opacity: 0;
+    animation: about-text-anim 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.3s;
+}
+
+.about-email {
+    opacity: 0;
+    animation: about-email-anim 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.6s;
+}
+
+.about-geo-structure {
+    opacity: 0;
+    animation: sphere-entrance 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 0.4s;
+}
+
+/* Skills Section */
+.skills-section {
+    padding: 7rem 0 6rem 0;
+    background: #181b2a;
+    position: relative;
+    overflow: hidden;
+    margin-top: 4rem; /* Extra space above skills section */
+}
+
+.skills-title {
+    font-size: 3.6rem;
+    font-weight: 900;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    padding-bottom: 0.5em;
+    text-shadow: 0 0 32px #a259ff, 0 0 12px #a259ff, 0 0 2px #a259ff;
+    display: inline-block;
+    overflow: hidden;
+    opacity: 1;
+    transform: none;
+}
+.skills-title-text {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(60%);
+    transition: opacity 0.5s cubic-bezier(.6,0,.4,1), transform 0.7s cubic-bezier(.6,0,.4,1);
+}
+.skills-title.animated .skills-title-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.skills-title::after {
+    content: '';
+    display: block;
+    height: 4px;
+    width: 60%;
+    margin: 0.7rem auto 0 auto;
+    background: linear-gradient(90deg, #A259FF 0%, #fff 100%);
+    border-radius: 2px;
+    opacity: 0;
+    transform: scaleX(0);
+    transition: opacity 0.5s 0.2s, transform 0.5s 0.2s;
+}
+.skills-title.animated::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.skills-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+}
+
+.skill-card {
+    background: #13131a;
+    border-radius: 1.5rem;
+    box-shadow: 0 0 0 rgba(162,89,255,0.18);
+    padding: 2.2rem 1.5rem 2.5rem 1.5rem;
+    transition: box-shadow 0.35s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1);
+    position: relative;
+    z-index: 1;
+    border: 1.5px solid rgba(162,89,255,0.08);
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 320px;
+}
+
+.skill-card:hover,
+.skill-card:focus-within {
+    box-shadow: 0 0 32px 8px #a259ff88, 0 0 0 2px #a259ff;
+    border-color: #a259ff;
+    transform: translateY(-6px) scale(1.03);
+}
+
+.skill-card .skill-card-title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 0 0 12px #a259ff99;
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+.skill-card .skill-icon {
+    font-size: 1.7em;
+    transition: color 0.2s;
+}
+.skill-card:hover .skill-card-title,
+.skill-card:hover .skill-icon {
+    color: #A259FF;
+}
+
+.skill-card-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    bottom: -0.3em;
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #A259FF 40%, #A259FF 60%, transparent);
+    box-shadow: 0 0 32px #A259FF, 0 0 64px #A259FF;
+    border-radius: 2px;
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s;
+}
+.skill-card:hover .skill-card-title::after {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+}
+
+.skill-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.skill-list li {
+    background: rgba(255,255,255,0.04);
+    color: #e0e0e0;
+    border-radius: 2em;
+    padding: 0.9rem 1.2rem;
+    font-size: 1.08rem;
+    text-align: center;
+    transition: background 0.2s, color 0.2s, border 0.2s, font-weight 0.2s;
+    border: 2px solid rgba(162,89,255,0.08);
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+.skill-list li:last-child {
+    margin-bottom: 0;
+}
+.skill-list li:hover {
+    border: 2px solid #A259FF;
+    color: #fff;
+    font-weight: 700;
+    background: rgba(162,89,255,0.08);
+    box-shadow: 0 0 12px #A259FF44;
+    z-index: 2;
+}
+
+@media (max-width: 1200px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 700px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    .skill-card {
+        min-height: 0;
+    }
+}
+
+.skills-grid-6 {
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
+    gap: 3.5rem;
+}
+
+@media (max-width: 900px) {
+    .skills-grid-6 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    .skills-grid-6 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.skill-card.selected .skill-card-title {
+    color: #A259FF;
+    text-shadow: 0 0 18px #A259FF, 0 0 36px #A259FF, 0 0 4px #fff;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+.skill-card .skill-icon svg {
+    color: #fff;
+    stroke: #fff;
+    transition: color 0.2s, stroke 0.2s;
+}
+.skill-card:hover .skill-icon svg {
+    color: #A259FF;
+    stroke: #A259FF;
+}
+
+/* What I Do Section Styles */
+.what-i-do-section {
+    padding: 6rem 0;
+    background: linear-gradient(to bottom, rgba(24, 27, 42, 0.95), rgba(24, 27, 42, 0.98));
+    position: relative;
+    overflow: hidden;
+}
+
+.what-i-do-title {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: visible;
+}
+.what-i-do-title-main {
+    display: block;
+    opacity: 0;
+    transform: translateY(60%);
+    animation: whatido-title-rise 1.1s cubic-bezier(.6,0,.4,1) forwards;
+    animation-delay: 0.1s;
+}
+.what-i-do-section.animated .what-i-do-title-main {
+    opacity: 1;
+    animation-play-state: running;
+}
+@keyframes whatido-title-rise {
+    0% { opacity: 0; transform: translateY(60%); }
+    60% { opacity: 1; }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.what-i-do-title-reflection {
+    display: block;
+    color: #A259FF;
+    opacity: 0;
+    filter: blur(1.2px) brightness(0.7);
+    transform: scaleY(-1) translateY(60%);
+    margin-top: -0.2em;
+    pointer-events: none;
+    animation: whatido-title-reflection-rise 1.1s cubic-bezier(.6,0,.4,1) forwards;
+    animation-delay: 0.1s;
+}
+.what-i-do-section.animated .what-i-do-title-reflection {
+    opacity: 0.22;
+    animation-play-state: running;
+}
+@keyframes whatido-title-reflection-rise {
+    0% { opacity: 0; transform: scaleY(-1) translateY(60%); }
+    60% { opacity: 0.22; }
+    100% { opacity: 0.22; transform: scaleY(-1) translateY(0); }
+}
+
+/* Add wave animation for the reflection */
+@keyframes reflection-wave {
+    0%, 100% {
+        transform: translateX(-50%) scaleY(-0.55) translateZ(-20px) skewX(0deg);
+        opacity: 0.35;
+    }
+    50% {
+        transform: translateX(-50%) scaleY(-0.55) translateZ(-20px) skewX(1.2deg);
+        opacity: 0.45;
+    }
+}
+
+/* Add hover effect for 3D interaction */
+.what-i-do-title:hover {
+    transform: translateZ(20px);
+    text-shadow: 
+        0 0 25px rgba(162, 89, 255, 0.6),
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.what-i-do-title:hover::before {
+    animation: reflection-wave 2.5s ease-in-out infinite;
+    opacity: 0.5;
+    filter: blur(0.2px);
+}
+
+@media (max-width: 768px) {
+    .what-i-do-title {
+        font-size: 3rem;
+        margin-bottom: 5rem;
+    }
+    .what-i-do-title::before {
+        bottom: -25px;
+        transform: translateX(-50%) scaleY(-0.5) translateZ(-10px);
+        opacity: 0.3;
+    }
+}
+
+.what-i-do-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+}
+
+.what-i-do-card {
+    background: rgba(24, 27, 42, 0.85);
+    border: 2.5px solid #A259FF;
+    border-radius: 16px;
+    padding: 2.5rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 0 15px rgba(162, 89, 255, 0.1),
+        inset 0 0 15px rgba(162, 89, 255, 0.05),
+        0 0 0 1px rgba(162, 89, 255, 0.1);
+}
+
+.what-i-do-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at center,
+        transparent 0%,
+        transparent 40%,
+        rgba(162, 89, 255, 0.05) 60%,
+        rgba(162, 89, 255, 0.1) 100%
+    );
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.what-i-do-card::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #A259FF, transparent, #A259FF);
+    border-radius: 18px;
+    z-index: -1;
+    opacity: 0.5;
+    filter: blur(8px);
+    transition: all 0.4s ease;
+}
+
+.what-i-do-card:hover {
+    transform: translateY(-5px);
+    background: #A259FF;
+    border-color: #A259FF;
+    box-shadow: 
+        0 0 35px rgba(162, 89, 255, 0.4),
+        0 0 70px rgba(162, 89, 255, 0.2),
+        0 0 100px rgba(162, 89, 255, 0.1),
+        inset 0 0 20px rgba(162, 89, 255, 0.2);
+}
+
+.what-i-do-card:hover::before {
+    opacity: 1;
+    background: radial-gradient(
+        circle at center,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.8) 50%,
+        rgba(0, 0, 0, 0.9) 100%
+    );
+}
+
+.what-i-do-card:hover::after {
+    opacity: 0.8;
+    filter: blur(12px);
+    background: linear-gradient(45deg, #000, #A259FF, #000);
+}
+
+.what-i-do-card-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.2rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.what-i-do-card-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    bottom: -0.3em;
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #A259FF 40%, #A259FF 60%, transparent);
+    box-shadow: 0 0 20px #A259FF;
+    border-radius: 2px;
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+.what-i-do-card:hover .what-i-do-card-title {
+    color: #000000;
+    font-size: 2rem;
+    font-weight: 800;
+    text-shadow: none;
+    transform: translateY(-2px);
+}
+
+.what-i-do-card:hover .what-i-do-card-title::after {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+    background: linear-gradient(90deg, transparent, #000000 40%, #000000 60%, transparent);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.what-i-do-icon {
+    margin-bottom: 1.8rem;
+    color: #ffffff;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 52px;
+}
+
+.what-i-do-icon svg {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+}
+
+.what-i-do-card:hover .what-i-do-icon {
+    color: #000000;
+    transform: scale(1.1);
+}
+
+.what-i-do-card:hover .what-i-do-icon svg {
+    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.3));
+    stroke-width: 1.8;
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+    .what-i-do-card-title {
+        font-size: 1.6rem;
+    }
+    
+    .what-i-do-card:hover .what-i-do-card-title {
+        font-size: 1.8rem;
+    }
+    
+    .what-i-do-icon {
+        height: 48px;
+    }
+    
+    .what-i-do-icon svg {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+.expertise-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.expertise-list li {
+    color: #a0a0a0;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.expertise-list li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: #A259FF;
+    transition: all 0.4s ease;
+}
+
+.what-i-do-card:hover .expertise-list li {
+    color: #000000;
+}
+
+.what-i-do-card:hover .expertise-list li::before {
+    color: #000000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .what-i-do-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .what-i-do-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .what-i-do-card {
+        padding: 2rem;
+    }
+}
+
+/* Dark pattern overlay on hover */
+.what-i-do-card:hover::before {
+    background-image: 
+        linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.1) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.1) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    opacity: 0.15;
+}
+
+/* --- Skills and Expertise Animations --- */
+
+/* Skill card icon grow animation */
+.skill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.7);
+  opacity: 0;
+  box-shadow: 0 0 24px 6px #A259FF, 0 0 48px 12px #A259FF44;
+  transition: transform 0.5s cubic-bezier(.6,0,.4,1), opacity 0.5s cubic-bezier(.6,0,.4,1), box-shadow 0.5s 0.5s cubic-bezier(.6,0,.4,1);
+  flex-shrink: 0;
+  margin-bottom: 0.7rem;
+}
+.skill-card.animated .skill-icon {
+  transform: scale(1);
+  opacity: 1;
+  box-shadow: 0 0 0 0 #A259FF00;
+  transition: transform 0.5s cubic-bezier(.6,0,.4,1), opacity 0.5s cubic-bezier(.6,0,.4,1), box-shadow 0.5s 0.5s cubic-bezier(.6,0,.4,1);
+}
+
+/* Skill card heading from neon bar */
+.skill-card-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.5s 0.2s cubic-bezier(.6,0,.4,1), transform 0.6s 0.2s cubic-bezier(.6,0,.4,1);
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+.skill-card.animated .skill-card-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skill list items slide in from left */
+.skill-list li {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.4s cubic-bezier(.6,0,.4,1), transform 0.5s cubic-bezier(.6,0,.4,1);
+}
+.skill-card.animated .skill-list li {
+  opacity: 1;
+  transform: translateX(0);
+}
+.skill-card.animated .skill-list li:nth-child(1) { transition-delay: 0.2s; }
+.skill-card.animated .skill-list li:nth-child(2) { transition-delay: 0.32s; }
+.skill-card.animated .skill-list li:nth-child(3) { transition-delay: 0.44s; }
+.skill-card.animated .skill-list li:nth-child(4) { transition-delay: 0.56s; }
+.skill-card.animated .skill-list li:nth-child(5) { transition-delay: 0.68s; }
+.skill-card.animated .skill-list li:nth-child(6) { transition-delay: 0.8s; }
+
+/* Skill icon above heading */
+.skill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.7);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(.6,0,.4,1), opacity 0.5s cubic-bezier(.6,0,.4,1);
+  flex-shrink: 0;
+  margin-bottom: 0.7rem;
+}
+.skill-card.animated .skill-icon {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.skill-heading-text {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 0 0 24px #A259FF, 0 0 48px #A259FF44;
+  display: block;
+  line-height: 1.2;
+  word-break: break-word;
+  max-width: 100%;
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.5s 0.18s cubic-bezier(.6,0,.4,1), transform 0.6s 0.18s cubic-bezier(.6,0,.4,1), text-shadow 0.5s 0.5s cubic-bezier(.6,0,.4,1);
+}
+.skill-card.animated .skill-heading-text {
+  opacity: 1;
+  transform: translateX(0);
+  text-shadow: 0 0 0 #A259FF00;
+  transition: opacity 0.5s 0.18s cubic-bezier(.6,0,.4,1), transform 0.6s 0.18s cubic-bezier(.6,0,.4,1), text-shadow 0.5s 0.5s cubic-bezier(.6,0,.4,1);
+}
+
+.neon-bar { display: none !important; }
+
+@media (max-width: 700px) {
+  .skill-heading-text {
+    font-size: 1.3rem;
+    max-width: 100%;
+  }
+}
+
+/* --- Neon Overlay for What I Do Cards --- */
+.neon-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #D1A3FF 0%, #A259FF 40%, #7F3CFF 100%);
+    opacity: 1;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 16px;
+    box-shadow: 0 0 128px 32px #A259FF, 0 0 256px 64px #fff, 0 0 64px 24px #A259FF, 0 0 32px 8px #fff;
+    filter: brightness(1.7) saturate(2.2);
+    transition: opacity 0.5s cubic-bezier(.6,0,.4,1);
+}
+.what-i-do-section.animated .neon-overlay {
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(.6,0,.4,1);
+}
+
+.what-i-do-section .what-i-do-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.what-i-do-section .what-i-do-card > *:not(.neon-overlay) {
+    position: relative;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.7s cubic-bezier(.6,0,.4,1) 0.5s;
+}
+.what-i-do-section.animated .what-i-do-card > *:not(.neon-overlay) {
+    opacity: 1;
+}
+
+/* --- Technical Expertise Heading Neon Glow Animation --- */
+.what-i-do-title-main,
+.what-i-do-title-reflection {
+  font-size: 4.2rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: inherit;
+  width: 100%;
+  line-height: 1.1;
+  text-shadow: 0 0 48px #A259FF, 0 0 24px #fff, 0 0 8px #A259FF, 0 0 2px #fff;
+  transition: text-shadow 0.5s 1.1s cubic-bezier(.6,0,.4,1);
+}
+.what-i-do-section.animated .what-i-do-title-main,
+.what-i-do-section.animated .what-i-do-title-reflection {
+  text-shadow: 0 0 18px #A259FF, 0 0 4px #fff;
+}
+@media (max-width: 768px) {
+  .what-i-do-title-main,
+  .what-i-do-title-reflection {
+    font-size: 3rem;
+  }
+}
+
+/* --- Featured Works Section Styles --- */
+.featured-works-section {
+  padding: 7rem 0 6rem 0;
+  background: linear-gradient(120deg, #181b2a 80%, #23263A 100%);
+  position: relative;
+  overflow: hidden;
+  margin-top: 4rem;
+}
+
+.featured-works-title {
+  font-size: 3.6rem;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  padding-bottom: 0.5em;
+  text-shadow: 0 0 32px #a259ff, 0 0 12px #a259ff, 0 0 2px #a259ff;
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+}
+.featured-works-title-text {
+  display: inline-block;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s cubic-bezier(.6,0,.4,1), transform 0.7s cubic-bezier(.6,0,.4,1);
+  background: linear-gradient(to right, #7F3CFF 0%, #A259FF 65%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-shadow:
+    0 0 12px #fff,
+    0 2px 8px rgba(0,0,0,0.10);
+}
+.featured-works-title::after {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 40%;
+  margin: 0.7rem auto 0 auto;
+  background: linear-gradient(to right, #7F3CFF 0%, #A259FF 65%, #fff 100%);
+  border-radius: 2px;
+  opacity: 1;
+  transform: scaleX(1);
+  box-shadow: 0 0 18px 2px #A259FF66, 0 0 32px 4px #fff2;
+}
+
+.featured-works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.project-card {
+  background: #13131a;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 0 rgba(162,89,255,0.18);
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+  transition: box-shadow 0.35s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1);
+  position: relative;
+  z-index: 1;
+  border: 1.5px solid rgba(162,89,255,0.08);
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+.project-card:hover,
+.project-card:focus-within {
+  box-shadow: 0 0 48px 16px #a259ffbb, 0 0 0 3.5px #a259ff;
+  border-color: #a259ff;
+  transform: translateY(-6px) scale(1.03);
+}
+
+.project-image-placeholder {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(135deg, #23263A 60%, #A259FF 100%);
+  border-radius: 1.1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 24px #A259FF44;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 2.2rem;
+  opacity: 0.7;
+}
+
+.project-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 0.7rem;
+  text-shadow: 0 0 12px #a259ff99;
+}
+
+.project-description {
+  color: #bdbdbd;
+  font-size: 1.08rem;
+  text-align: center;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 1100px) {
+  .featured-works-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .featured-works-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-card {
+    min-height: 0;
+  }
+  .featured-works-title {
+    font-size: 2.2rem;
+  }
+}
+
+/* --- Featured Works List (Single Column) --- */
+.featured-works-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  margin-top: 3.5rem;
+}
+
+.project-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.2rem;
+  background: rgba(24, 27, 42, 0.98);
+  border-radius: 1.5rem;
+  box-shadow: 0 0 32px 0 #A259FF22, 0 2px 24px 0 #0002;
+  padding: 2.8rem 2.5rem 2.8rem 2.2rem;
+  position: relative;
+  min-height: 180px;
+  transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1), transform 0.2s cubic-bezier(.4,0,.2,1);
+}
+.project-card:hover {
+  box-shadow: 0 0 48px 8px #A259FF55, 0 2px 32px 0 #0004;
+  transform: translateY(-4px) scale(1.01);
+}
+
+.project-badge {
+  font-size: 2.8rem;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  filter: drop-shadow(0 0 12px #A259FF88);
+  border-radius: 0.7em;
+  width: 3.2em;
+  height: 3.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+.project-purple .project-badge { filter: drop-shadow(0 0 16px #A259FF); }
+.project-orange .project-badge { filter: drop-shadow(0 0 16px #FF9900); }
+.project-green .project-badge { filter: drop-shadow(0 0 16px #00C853); }
+.project-black .project-badge { filter: drop-shadow(0 0 16px #222); }
+
+.project-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.project-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 12px #A259FF33;
+}
+.project-description {
+  color: #e0e0e0;
+  font-size: 1.13rem;
+  line-height: 1.6;
+  margin-bottom: 0.2rem;
+}
+.project-stack {
+  font-size: 1.01rem;
+  color: #A259FF;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  letter-spacing: 0.01em;
+}
+.project-stack span {
+  color: #fff;
+  font-weight: 400;
+}
+
+@media (max-width: 900px) {
+  .project-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.2rem;
+  }
+  .project-badge {
+    margin-bottom: 0.8rem;
+    margin-top: 0;
+  }
+}
+@media (max-width: 600px) {
+  .featured-works-list {
+    gap: 2.2rem;
+  }
+  .project-card {
+    padding: 1.2rem 0.5rem;
+  }
+  .project-title {
+    font-size: 1.2rem;
+  }
+}
+/* Remove old grid styles if not needed */
+.featured-works-grid { display: none !important; }
+
+.project-subheading {
+  font-size: 1.08rem;
+  color: #bdbdbd;
+  font-weight: 400;
+  margin-top: 0.2rem;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.project-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.project-card:hover .project-title {
+  color: #A259FF;
+  text-shadow: 0 0 18px #A259FF99;
+}
+
+.about-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 2.2em;
+  padding: 1em 2.5em 1em 2.5em;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  background: transparent;
+  border: 2.5px solid #A259FF;
+  border-radius: 50px;
+  box-shadow: 0 0 18px #A259FF44, 0 0 2px #fff;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(.4,0,.2,1);
+  outline: none;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 8px #A259FF99;
+  position: relative;
+}
+.about-contact-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1.1em;
+  background: rgba(24,27,42,0.85);
+  border-radius: 50%;
+  box-shadow: 0 0 16px 4px #A259FF88, 0 0 2px #fff;
+  padding: 0.18em 0.18em;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+  border: 2px solid #A259FF;
+}
+.about-contact-arrow:hover, .about-contact-arrow:focus {
+  background: #A259FF;
+  box-shadow: 0 0 32px 8px #A259FF, 0 0 8px #fff;
+  outline: none;
+}
+.about-contact-arrow svg {
+  display: block;
+}
+.about-contact-btn:hover, .about-contact-btn:focus {
+  background: #A259FF;
+  color: #181b2a;
+  box-shadow: 0 0 32px #A259FF, 0 0 8px #fff;
+  border-color: #fff;
+  transform: translateY(-2px) scale(1.04);
+}
+
+.project-card {
+  position: relative;
+}
+.project-arrow-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 2.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  text-decoration: none;
+  outline: none;
+}
+.project-arrow-oval {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(24,27,42,0.85);
+  border-radius: 50%;
+  box-shadow: 0 0 16px 4px #A259FF88, 0 0 2px #fff;
+  padding: 0.18em 0.18em;
+  border: 2px solid #A259FF;
+  transition: box-shadow 0.2s, background 0.2s, border-color 0.2s;
+}
+.project-arrow-link:hover .project-arrow-oval,
+.project-arrow-link:focus .project-arrow-oval {
+  background: #A259FF;
+  box-shadow: 0 0 32px 8px #A259FF, 0 0 8px #fff;
+  border-color: #fff;
+}
+.project-arrow-oval svg {
+  display: block;
+}
+@media (max-width: 900px) {
+  .project-arrow-link {
+    right: 1.2rem;
+  }
+}
+@media (max-width: 600px) {
+  .project-arrow-link {
+    right: 0.5rem;
+  }
+}
+
+.back-to-featured-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.7em 1.7em 0.7em 1.1em;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  background: transparent;
+  border: 2.5px solid #A259FF;
+  border-radius: 50px;
+  box-shadow: 0 0 18px #A259FF44, 0 0 2px #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(.4,0,.2,1);
+  outline: none;
+  letter-spacing: 0.04em;
+  margin-bottom: 2.2rem;
+  margin-top: 0.5rem;
+  position: relative;
+}
+.back-to-featured-btn:hover, .back-to-featured-btn:focus {
+  background: #A259FF;
+  color: #181b2a;
+  box-shadow: 0 0 32px #A259FF, 0 0 8px #fff;
+  border-color: #fff;
+  transform: translateY(-2px) scale(1.04);
+}
+.back-arrow-oval {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(24,27,42,0.85);
+  border-radius: 50%;
+  box-shadow: 0 0 16px 4px #A259FF88, 0 0 2px #fff;
+  padding: 0.13em 0.13em;
+  border: 2px solid #A259FF;
+  transition: box-shadow 0.2s, background 0.2s, border-color 0.2s;
+}
+.back-to-featured-btn:hover .back-arrow-oval,
+.back-to-featured-btn:focus .back-arrow-oval {
+  background: #A259FF;
+  box-shadow: 0 0 32px 8px #A259FF, 0 0 8px #fff;
+  border-color: #fff;
+}
+.back-arrow-oval svg {
+  display: block;
+}
+
+.project-main-word {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  font-size: 1.1em;
+  margin-right: 0.18em;
+  display: inline-block;
+  text-shadow: 0 0 8px #A259FF, 0 0 16px #A259FF99;
+  transition: text-shadow 0.25s, color 0.25s;
+}
+.project-card:hover .project-main-word {
+  color: #fff;
+  text-shadow: 0 0 16px #A259FF, 0 0 32px #A259FFcc, 0 0 4px #fff;
+}
+
+.project-detail-title {
+  opacity: 0;
+  transform: translateY(60%);
+  transition: opacity 0.5s cubic-bezier(.6,0,.4,1), transform 0.7s cubic-bezier(.6,0,.4,1);
+  margin: 0 auto 1.2rem auto;
+  display: block;
+  text-align: center;
+  font-size: 2.8rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #A259FF 0%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 24px #A259FF99, 0 0 8px #fff;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+.project-detail-title.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+.project-detail-title::after {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 40%;
+  margin: 0.7rem auto 0 auto;
+  background: linear-gradient(to right, #A259FF 0%, #fff 100%);
+  border-radius: 2px;
+  opacity: 0;
+  transform: scaleX(0);
+  box-shadow: 0 0 18px 2px #A259FF66, 0 0 32px 4px #fff2;
+  transition: opacity 0.5s 0.2s, transform 0.5s 0.2s;
+}
+.project-detail-title.animated::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+.back-to-featured-btn {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-80px) scale(0.95);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.back-to-featured-btn.animated {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  animation: back-btn-drop 0.7s cubic-bezier(.6,0,.4,1) 1.1s both;
+}
+
+/* Neon purple diagonal shine bar for project cards */
+.project-card {
+  position: relative;
+  overflow: hidden;
+}
+.project-card .neon-shine {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120%;
+  height: 100%;
+  opacity: 0;
+  z-index: 2;
+  background: linear-gradient(120deg, transparent 44%, rgba(162,89,255,0.38) 48%, rgba(162,89,255,0.55) 50%, rgba(162,89,255,0.38) 52%, transparent 56%);
+  filter: blur(2.2px) brightness(1.7) saturate(2.2);
+  transform: translate(-80%, -80%) skew(-24deg);
+  transition: none;
+}
+.project-card:hover .neon-shine,
+.project-card:focus-within .neon-shine {
+  opacity: 1;
+  animation: neon-shine-diagonal 0.38s cubic-bezier(.7,0,.3,1);
+}
+@keyframes neon-shine-diagonal {
+  0% {
+    opacity: 1;
+    transform: translate(-80%, -80%) skew(-24deg);
+  }
+  85% {
+    opacity: 1;
+    transform: translate(60%, 60%) skew(-24deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(80%, 80%) skew(-24deg);
+  }
+}
+
+/* Neon purple oval hover/focus effect for nav bar */
+.main-nav {
+  display: flex;
+  gap: 2.2rem;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.main-nav li {
+  position: relative;
+}
+.main-nav a {
+  position: relative;
+  display: inline-block;
+  padding: 0.7rem 2.2rem;
+  border-radius: 2.5rem;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.22rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  z-index: 1;
+  transition: color 0.22s cubic-bezier(.4,0,.2,1), font-weight 0.22s cubic-bezier(.4,0,.2,1);
+  overflow: visible;
+  border: none;
+  background: none;
+}
+.main-nav a::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 90%;
+  height: 80%;
+  border-radius: 2.5rem;
+  border: 3.5px solid #A259FF;
+  box-shadow: none;
+  opacity: 0;
+  transition: none;
+  z-index: 2;
+  pointer-events: none;
+  background: none;
+  transform: translate(-50%, -50%);
+}
+.main-nav a:hover::before,
+.main-nav a:focus::before {
+  opacity: 1;
+  box-shadow: none;
+}
+.main-nav a:hover,
+.main-nav a:focus {
+  color: #A259FF;
+  font-weight: 900;
+  outline: none;
+}
+
+/* Featured Works heading entrance animation (like Skills) */
+.featured-works-title {
+  opacity: 0;
+  transform: translateY(60%);
+  transition: opacity 0.5s cubic-bezier(.6,0,.4,1), transform 0.7s cubic-bezier(.6,0,.4,1);
+}
+.featured-works-title.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+.featured-works-title::after {
+  opacity: 0;
+  transform: scaleX(0);
+  transition: opacity 0.5s 0.2s, transform 0.5s 0.2s;
+}
+.featured-works-title.animated::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Project card entrance animation */
+@keyframes fw-card-slide-in {
+  0% { opacity: 0; transform: translateX(-220px) scale(0.98); }
+  80% { opacity: 1; transform: translateX(8px) scale(1.03); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+.project-card.fw-animate-in {
+  animation: fw-card-slide-in 0.85s cubic-bezier(.6,0,.4,1) forwards;
+}
+
+/* One-time text hover and shine bar animation after card entrance */
+.project-card.fw-animate-in-done .project-title,
+.project-card.fw-animate-in-done .project-main-word {
+  color: #A259FF;
+  text-shadow: 0 0 18px #A259FF99;
+  transition: color 0.22s, text-shadow 0.22s;
+}
+.project-card.fw-animate-in-done .neon-shine {
+  opacity: 1;
+  animation: neon-shine-diagonal 0.38s cubic-bezier(.7,0,.3,1);
+}
+.project-card.fw-animate-in-done .project-arrow-oval {
+  background: #A259FF;
+  border-color: #fff;
+  transition: background 0.22s, border-color 0.22s;
+}
+
+/* Project detail heading entrance animation */
+.project-detail-title {
+  opacity: 0;
+  transform: translateY(60%);
+  transition: opacity 0.5s cubic-bezier(.6,0,.4,1), transform 0.7s cubic-bezier(.6,0,.4,1);
+}
+.project-detail-title.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+.project-detail-title::after {
+  opacity: 0;
+  transform: scaleX(0);
+  transition: opacity 0.5s 0.2s, transform 0.5s 0.2s;
+}
+.project-detail-title.animated::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Project description slide down */
+@keyframes project-desc-slide-down {
+  0% { opacity: 0; transform: translateY(-32px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.project-description.animated {
+  animation: project-desc-slide-down 0.7s cubic-bezier(.6,0,.4,1) 0.18s both;
+}
+
+/* Project stack slide in from left */
+@keyframes project-stack-slide-in {
+  0% { opacity: 0; transform: translateX(-48px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.project-stack.animated {
+  animation: project-stack-slide-in 0.7s cubic-bezier(.6,0,.4,1) 0.32s both;
+}
+
+/* Project image fade in from low opacity */
+@keyframes project-image-fade-in {
+  0% { opacity: 0.1; filter: blur(8px); }
+  100% { opacity: 1; filter: blur(0); }
+}
+.project-image-entrance.animated {
+  animation: project-image-fade-in 0.9s cubic-bezier(.6,0,.4,1) 0.22s both;
+}
+
+/* Back to FW button drop down */
+@keyframes back-btn-drop {
+  0% { opacity: 0; transform: translateY(-80px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.back-to-featured-btn.animated {
+  animation: back-btn-drop 0.7s cubic-bezier(.6,0,.4,1) 1.1s both;
+}
+
+/* --- Get in Touch (Contact) Section Redesign --- */
+.contact-section {
+  width: 100vw;
+  min-height: 60vh;
+  background: var(--secondary-bg, #181b2a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 0;
+}
+.contact-container {
+  display: flex;
+  gap: 4rem;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+.contact-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 320px;
+  max-width: 420px;
+  padding-left: 1.5rem;
+}
+.contact-title {
+  width: 100%;
+  font-size: 4rem;
+  font-weight: 900;
+  color: #A259FF;
+  margin-bottom: 0.2em;
+  letter-spacing: 2px;
+  text-align: left;
+  text-shadow: 0 0 18px #A259FF, 0 0 4px #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+}
+.contact-title-text {
+  display: block;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #A259FF;
+  font-size: 4rem;
+  filter: brightness(1.1) saturate(1.2);
+  text-shadow: 0 0 18px #A259FF, 0 0 4px #fff;
+  margin-bottom: 0.05em;
+  margin-top: 0;
+  white-space: nowrap;
+  text-align: left;
+  width: max-content;
+}
+.contact-title-underline {
+  width: 120px;
+  height: 5px;
+  background: linear-gradient(90deg, #A259FF 0%, #fff 100%);
+  border-radius: 3px;
+  margin: 0 auto 1.2em auto;
+  box-shadow: 0 0 12px #A259FF88;
+  display: block;
+  position: relative;
+}
+@media (max-width: 900px) {
+  .contact-title-text {
+    font-size: 2.2rem;
+  }
+  .contact-title-underline {
+    width: 70px;
+    height: 3px;
+  }
+}
+
+.contact-message {
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: #fff;
+  margin-bottom: 2.5rem;
+  line-height: 1.2;
+  margin-top: 0.2em;
+  text-shadow: 0 0 6px #A259FF55;
+  letter-spacing: 0.04em;
+  font-family: 'Poppins', Arial, sans-serif;
+  max-width: 700px;
+  text-transform: none;
+}
+.contact-socials {
+  display: flex;
+  gap: 2.2rem;
+  margin-top: 2.5rem;
+}
+.contact-social-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #A259FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px #A259FF44;
+  transition: transform 0.18s, box-shadow 0.18s;
+  color: #181b2a;
+  font-size: 2.2rem;
+}
+.contact-social-icon:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 8px 32px #A259FF88;
+  background: #7F3CFF;
+}
+.contact-social-icon svg {
+  display: block;
+  color: #fff;
+}
+.contact-right {
+  flex: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  margin-left: 8rem;
+}
+@media (max-width: 1100px) {
+  .contact-right {
+    margin-left: 0;
+  }
+}
+.contact-form {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  background: #181b2a;
+  border: 2px solid #A259FF44;
+  border-radius: 16px;
+  color: #fff;
+  font-size: 1.15rem;
+  font-family: inherit;
+  margin-bottom: 0.2rem;
+  transition: border 0.2s, box-shadow 0.2s, transform 0.18s;
+  box-shadow: 0 2px 12px #A259FF11;
+}
+.contact-form input:hover,
+.contact-form textarea:hover,
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border: 2px solid #A259FF;
+  box-shadow: 0 0 24px 4px #A259FF99, 0 0 8px #fff2;
+  outline: none;
+  transform: scale(1.025);
+  z-index: 2;
+}
+.contact-form textarea {
+  min-height: 220px; /* Increased from 120px to 220px for more depth */
+  resize: vertical;
+}
+.submit-button {
+  width: 100%;
+  padding: 1.2rem 0;
+  background: linear-gradient(135deg, #7F3CFF 0%, #A259FF 100%);
+  color: #181b2a;
+  box-shadow: 0 0 24px 4px #7F3CFF88, 0 0 8px #fff2;
+  border: none;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 1.3rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+}
+.submit-button:hover {
+  background: linear-gradient(135deg, #5A1FCF 0%, #A259FF 100%);
+  box-shadow: 0 0 32px 8px #7F3CFFcc, 0 0 16px #fff4;
+  color: #181b2a;
+  transform: translateY(-2px) scale(1.02);
+}
+@media (max-width: 900px) {
+  .contact-container {
+    flex-direction: column;
+    gap: 3rem;
+    align-items: stretch;
+    padding: 0 1.2rem;
+  }
+  .contact-left, .contact-right {
+    max-width: 100vw;
+    padding-left: 0;
+    align-items: center;
+  }
+  .contact-form {
+    max-width: 100vw;
+  }
+}
+
+.contact-email-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 3rem;
+  background: linear-gradient(135deg, #7F3CFF 0%, #A259FF 100%);
+  border-radius: 2.5rem;
+  box-shadow: 0 0 24px 4px #7F3CFF88, 0 0 8px #fff2;
+  color: #181b2a;
+  font-weight: 700;
+  font-size: 1.18rem;
+  text-decoration: none;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+  margin: 0.8rem 0 0.8rem 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  height: 56px;
+  min-width: 120px;
+}
+.contact-email-btn svg {
+  color: #181b2a;
+  display: block;
+  width: 40px;
+  height: 40px;
+  filter: none;
+}
+.contact-email-btn:hover, .contact-email-btn:focus {
+  background: #5A1FCF;
+  box-shadow: 0 0 32px 8px #7F3CFFcc, 0 0 16px #fff4;
+  transform: translateY(-2px) scale(1.04);
+  outline: none;
+}
+
+.contact-form input:focus:not(:placeholder-shown),
+.contact-form textarea:focus:not(:placeholder-shown) {
+  animation: typing-glow 0.7s infinite alternate;
+}
+@keyframes typing-glow {
+  0% {
+    box-shadow: 0 0 24px 4px #A259FF99, 0 0 8px #fff2;
+    border-color: #A259FF;
+  }
+  100% {
+    box-shadow: 0 0 36px 8px #A259FFcc, 0 0 16px #fff4;
+    border-color: #A259FF;
+  }
+}
+
+/* Envelope Animation for Send Button */
+.submit-button {
+  position: relative;
+  overflow: hidden;
+}
+.btn-anim {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.5em;
+}
+.envelope-anim {
+  width: 48px;
+  height: 32px;
+  display: block;
+}
+.envelope-paper {
+  transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+  transform: translateY(0);
+}
+.submit-button.sending .envelope-paper {
+  transform: translateY(18px);
+}
+.submit-button.sending .envelope-flap {
+  transition: fill 0.3s;
+  fill: #A259FF;
+}
+.submit-button.sending .envelope-body {
+  transition: filter 0.3s;
+  filter: drop-shadow(0 0 8px #A259FF88);
+}
+.submit-button.sending {
+  pointer-events: none;
+}
+.submit-button.sending .btn-text {
+  opacity: 0;
+}
+.submit-button.sending .btn-anim {
+  display: inline-block !important;
+  animation: envelope-slide-right 0.7s 0.5s forwards;
+}
+@keyframes envelope-slide-right {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(120px); opacity: 0; }
+}
+
+/* --- Refined Animated Send Button Multi-Step --- */
+.submit-button {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  height: 56px;
+  /* Keep button size fixed */
+}
+.btn-text {
+  display: inline-block;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #181b2a;
+  transition: transform 0.45s cubic-bezier(.4,0,.2,1), opacity 0.18s;
+  z-index: 2;
+}
+.btn-paper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 90px;
+  height: 28px;
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity 0.2s, transform 0.3s;
+}
+.btn-paper-text {
+  display: block;
+  width: 90px;
+  height: 28px;
+  background: #fff;
+  color: #A259FF;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px #A259FF22;
+  text-align: center;
+  line-height: 28px;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-envelope {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+  transition: opacity 0.2s, transform 0.3s;
+}
+.envelope-svg {
+  width: 48px;
+  height: 32px;
+  display: block;
+}
+/* Step 1: Shrink text and hide immediately */
+.submit-button.sending .btn-text {
+  opacity: 0;
+  transform: scale(0.45) translateY(18px);
+  transition: opacity 0.12s, transform 0.45s cubic-bezier(.4,0,.2,1);
+}
+/* Step 2: Show paper with text */
+.submit-button.paper-in .btn-paper {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 0.18s, transform 0.3s;
+}
+.submit-button.paper-in .btn-paper-text {
+  animation: paper-slide-in 0.7s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes paper-slide-in {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(18px); }
+}
+/* Step 3: Show envelope, hide paper */
+.submit-button.flap-close .btn-paper {
+  opacity: 0;
+}
+.submit-button.flap-close .btn-envelope {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.submit-button.flap-close .envelope-flap {
+  animation: flap-close-anim 0.6s cubic-bezier(.4,0,.2,1) forwards;
+  transform-origin: 50% 100%;
+}
+@keyframes flap-close-anim {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(-110deg); }
+}
+/* Step 4: Envelope flies to right-bottom with curve and fades out */
+.submit-button.envelope-fly .btn-envelope {
+  animation: envelope-fly-anim 1.7s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes envelope-fly-anim {
+  0% { transform: translate(-50%, -50%) scale(1.08) rotate(0deg); opacity: 1; }
+  40% { transform: translate(60px, 20px) scale(0.9) rotate(-8deg); opacity: 1; }
+  70% { transform: translate(180px, 60px) scale(0.7) rotate(-16deg); opacity: 0.95; }
+  100% { transform: translate(420px, 180px) scale(0.5) rotate(-24deg); opacity: 0; }
+}
+/* Hide everything after fly */
+.submit-button.done .btn-envelope,
+.submit-button.done .btn-paper,
+.submit-button.done .btn-text {
+  display: none !important;
+}
+
+/* --- Button Size & Loading Dots --- */
+.submit-button {
+  width: 100%;
+  min-width: 220px;
+  max-width: 100%;
+  height: 64px;
+  min-height: 64px;
+  font-size: 1.35rem;
+  border-radius: 20px;
+  box-shadow: 0 0 32px 8px #7F3CFFcc, 0 0 16px #fff4;
+  /* Keep button size fixed and bold */
+}
+.btn-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.7;
+  margin: 0 2px;
+  animation: dot-bounce 1.1s infinite both;
+}
+.dot:nth-child(2) { animation-delay: 0.18s; }
+.dot:nth-child(3) { animation-delay: 0.36s; }
+@keyframes dot-bounce {
+  0%, 80%, 100% { transform: scale(0.8); opacity: 0.7; }
+  40% { transform: scale(1.2); opacity: 1; }
+}
+/* Ensure button size stays fixed after animation */
+.submit-button.done, .submit-button {
+  width: 100%;
+  min-width: 220px;
+  max-width: 100%;
+  height: 64px;
+  min-height: 64px;
+}
+
+/* Contact Section Animations */
+.contact-title.animated {
+  animation: contact-title-slide 0.8s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes contact-title-slide {
+  0% { opacity: 0; transform: translateY(-60px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.contact-message.animated {
+  animation: none !important;
+  border-right: none !important;
+  overflow: visible;
+  white-space: normal;
+}
+.msg-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.5em;
+  transform: scale(0.2);
+  opacity: 0;
+  animation: icon-pop 0.5s cubic-bezier(.4,0,.2,1) 0.1s forwards;
+}
+@keyframes icon-pop {
+  0% { transform: scale(0.2); opacity: 0; }
+  70% { transform: scale(1.18); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.contact-left.animated, .contact-right.animated {
+  animation: column-slide-down 0.9s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes column-slide-down {
+  0% { opacity: 0; transform: translateY(-80px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.contact-animate-hover {
+  animation: hover-glow 0.7s cubic-bezier(.4,0,.2,1) 1 both;
+}
+@keyframes hover-glow {
+  0% { box-shadow: 0 0 0 0 #A259FF00; transform: scale(1); }
+  60% { box-shadow: 0 0 32px 8px #A259FF99; transform: scale(1.04); }
+  100% { box-shadow: 0 0 0 0 #A259FF00; transform: scale(1); }
+}
+.copyright-animate-hover {
+  animation: copyright-glow 1.2s cubic-bezier(.4,0,.2,1) 1 both;
+}
+@keyframes copyright-glow {
+  0% { color: #fff; text-shadow: none; }
+  40% { color: #A259FF; text-shadow: 0 0 18px #A259FF, 0 0 4px #fff; }
+  100% { color: #fff; text-shadow: none; }
+}
+
+.contact-copyright-bottom {
+  width: 100vw;
+  text-align: center;
+  color: #fff;
+  font-size: 1.18rem;
+  font-weight: 700;
+  background: none;
+  margin: 1.5rem 0 0 0;
+  padding: 1.2em 0 10em 0;
+  text-shadow: 0 0 18px #A259FF, 0 0 4px #fff;
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  z-index: 2;
+  font-family: inherit;
+}
+@media (max-width: 600px) {
+  .contact-copyright-bottom {
+    font-size: 0.98rem;
+    padding: 1em 0 6em 0;
+    margin: 0.7rem 0 0 0;
+  }
+}
+
+/* Theme Sidebar and Toggle Styles */
+.theme-arrow-btn {
+  position: absolute;
+  left: -70px; /* Adjusted to be perfectly attached */
+  top: 50%;
+  transform: translateY(-50%) !important;
+  z-index: 120002;
+  background: #181b2a !important;
+  border-radius: 32px 0 0 32px !important;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  width: 56px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+  box-shadow: none;
+}
+@media (max-width: 600px) {
+  .theme-arrow-btn {
+    width: 40px;
+    height: 72px;
+    border-radius: 24px 0 0 24px !important;
+    left: -54px; /* Adjusted for mobile to be perfectly attached */
+  }
+}
+.theme-arrow-btn svg {
+  transition: transform 0.3s;
+  width: 44px;
+  height: 44px;
+}
+.theme-arrow-btn .arrow-icon {
+  display: block;
+  transition: transform 0.3s;
+  transform: rotate(180deg) !important; /* Arrow points LEFT by default */
+}
+.theme-arrow-btn.rotated .arrow-icon {
+  transform: rotate(0deg) !important; /* Arrow points RIGHT when rotated */
+}
+
+.theme-sidebar {
+  position: fixed;
+  top: 0;
+  right: -120px;
+  width: 120px;
+  height: 100vh;
+  background: rgba(255,255,255,0.13) !important; /* Keep transparent background */
+  z-index: 120001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  backdrop-filter: blur(16px) saturate(1.2) !important; /* Keep backdrop-filter */
+  border: none;
+  transition: right 0.35s cubic-bezier(.4,0,.2,1), background 0.3s;
+  padding-top: 2.5rem;
+}
+body.light-theme .theme-sidebar {
+  background: rgba(255,255,255,0.13) !important; /* Keep transparent light background */
+  backdrop-filter: blur(16px) saturate(1.2) !important; /* Keep backdrop-filter */
+}
+.theme-sidebar.open {
+  right: 0;
+}
+.theme-sidebar .sidebar-menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+.theme-sidebar .sidebar-menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 0;
+  border-bottom: 1.5px solid rgba(255,255,255,0.38);
+  transition: background 0.2s;
+}
+.theme-sidebar .sidebar-menu-item:last-child {
+  border-bottom: none;
+}
+.theme-sidebar .sidebar-menu-item svg,
+.theme-sidebar .sidebar-menu-item i {
+  color: #fff;
+  font-size: 2.1rem;
+  opacity: 0.92;
+  transition: color 0.2s, opacity 0.2s;
+}
+.theme-sidebar .sidebar-menu-item:hover {
+  background: rgba(255,255,255,0.08);
+}
+.theme-sidebar .sidebar-menu-item:hover svg,
+.theme-sidebar .sidebar-menu-item:hover i {
+  color: #A259FF;
+  opacity: 1;
+}
+.theme-toggle:hover {
+  background: #23263A;
+}
+.theme-icon {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.theme-moon {
+  background: none;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 #A259FF;
+  left: 12px;
+  top: 12px;
+  opacity: 1;
+}
+.theme-sun {
+  left: 12px;
+  top: 12px;
+}
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+body.light-theme .theme-sidebar {
+  background: rgba(255,255,255,0.13) !important; /* Keep transparent light background */
+  backdrop-filter: blur(16px) saturate(1.2) !important; /* Keep backdrop-filter */
+}
+body.light-theme .theme-toggle {
+  background: #f3f3f3;
+}
+body.light-theme .theme-arrow-btn svg path {
+  fill: rgba(220,220,220,0.7);
+}
+body.light-theme .theme-arrow-btn svg polyline {
+  stroke: #A259FF;
+}
+body.light-theme .contact-copyright-bottom,
+body.light-theme .fixed-copyright,
+body.light-theme .contact-copyright {
+  background: rgba(240,240,240,0.82);
+  color: #181b2a;
+  box-shadow: 0 0 18px #A259FF22;
+}
+/* Show correct icon */
+body.light-theme .theme-moon { opacity: 0; }
+body.light-theme .theme-sun { opacity: 1; }
+body:not(.light-theme) .theme-moon { opacity: 1; }
+body:not(.light-theme) .theme-sun { opacity: 0; }
+
+@media (max-width: 600px) {
+  .theme-sidebar { width: 90px; right: -90px; }
+  .theme-sidebar.open { right: 0; }
+  .theme-arrow-btn { width: 36px; height: 72px; }
+  .theme-arrow-btn.hide { right: -40px; }
+}
+
+/* Prevent theme inversion for special sections */
+body.light-theme .no-theme-invert,
+body.light-theme .no-theme-invert * {
+  background: #181b2a !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  border-color: #A259FF !important;
+  text-shadow: 0 0 18px #A259FF, 0 0 4px #fff !important;
+  filter: none !important;
+}
+
+/* Light theme: make all backgrounds white or very light */
+body.light-theme,
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: 0 0 0 0 #fff0 !important;
+}
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #fff !important;
+  color: #181b2a !important;
+}
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important;
+}
+
+/* Preserve all animations and transitions */
+body.light-theme * {
+  transition: all 0.3s cubic-bezier(.4,0,.2,1) !important;
+}
+
+/* Keep all positioning and layouts */
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .contact-section {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Preserve all grid and flex layouts */
+body.light-theme .container,
+body.light-theme .skills-grid,
+body.light-theme .what-i-do-grid,
+body.light-theme .featured-works-grid {
+  display: grid !important;
+  gap: 2.5rem !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 2rem !important;
+}
+
+/* Keep all z-index values */
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .contact-section {
+  z-index: 1 !important;
+}
+
+/* Preserve all media queries */
+@media (max-width: 1200px) {
+  body.light-theme .container,
+  body.light-theme .skills-grid,
+  body.light-theme .what-i-do-grid,
+  body.light-theme .featured-works-grid {
+    max-width: 100% !important;
+    padding: 0 1.5rem !important;
+  }
+}
+
+@media (max-width: 900px) {
+  body.light-theme .container,
+  body.light-theme .skills-grid,
+  body.light-theme .what-i-do-grid,
+  body.light-theme .featured-works-grid {
+    padding: 0 1rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  body.light-theme .container,
+  body.light-theme .skills-grid,
+  body.light-theme .what-i-do-grid,
+  body.light-theme .featured-works-grid {
+    padding: 0 0.5rem !important;
+  }
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1002;
+    margin-right: 1rem;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: #A259FF;
+    margin: 6px 0;
+    transition: all 0.3s cubic-bezier(.4,0,.2,1);
+    border-radius: 3px;
+    box-shadow: 0 0 8px #A259FF99;
+}
+
+.hamburger-menu:hover span {
+    background: #fff;
+    box-shadow: 0 0 12px #A259FF;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(24, 27, 42, 0.98);
+        backdrop-filter: blur(10px);
+        padding: 80px 2rem 2rem;
+        transition: right 0.3s cubic-bezier(.4,0,.2,1);
+        box-shadow: -4px 0 24px rgba(162, 89, 255, 0.15);
+        border-left: 1px solid rgba(162, 89, 255, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .main-nav.active {
+        right: 0;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 2.5rem;
+        width: 100%;
+    }
+
+    .main-nav li {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: all 0.3s cubic-bezier(.4,0,.2,1);
+        width: 100%;
+    }
+
+    .main-nav.active li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .main-nav li:nth-child(1) { transition-delay: 0.1s; }
+    .main-nav li:nth-child(2) { transition-delay: 0.2s; }
+    .main-nav li:nth-child(3) { transition-delay: 0.3s; }
+    .main-nav li:nth-child(4) { transition-delay: 0.4s; }
+    .main-nav li:nth-child(5) { transition-delay: 0.5s; }
+
+    .main-nav a {
+        font-size: 1.2rem;
+        padding: 0.8rem 0;
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .main-nav a::before {
+        display: none;
+    }
+}
+
+body.light-theme .what-i-do-card,
+body.light-theme .skill-card,
+body.light-theme .project-card {
+  box-shadow: 0 0 32px 8px #fff, 0 0 48px 16px #A259FF88, 0 0 0 2px #fff4;
+  border: 2.5px solid #fff8;
+  background: rgba(255,255,255,0.08) !important;
+  transition: box-shadow 0.3s, border 0.3s, background 0.3s;
+}
+body.light-theme .what-i-do-card:hover,
+body.light-theme .skill-card:hover,
+body.light-theme .project-card:hover {
+  box-shadow: 0 0 64px 24px #fff, 0 0 96px 32px #A259FFcc, 0 0 0 4px #fff8;
+  border: 2.5px solid #A259FF;
+  background: rgba(255,255,255,0.16) !important;
+}
+
+@media (max-width: 600px) {
+  .theme-arrow-btn { border-radius: 18px 48px 48px 18px; }
+}
+
+.project-card,
+.project-card:hover,
+.project-badge,
+.project-purple .project-badge,
+.project-orange .project-badge,
+.project-green .project-badge,
+.project-black .project-badge {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+<button class="sidebar-arrow">
+  <span>&gt;</span>
+</button>
+
+.sidebar-arrow {
+  transform: rotate(-90deg); /* Try 90deg if this points the wrong way */
+}
+
+.your-button-class {
+  transform: rotate(90deg);
+}
+
+.theme-arrow-btn .arrow-icon {
+  display: block;
+  transition: transform 0.3s;
+  transform: rotate(180deg) !important; /* Arrow points LEFT by default */
+}
+.theme-arrow-btn.rotated .arrow-icon {
+  transform: rotate(0deg) !important; /* Arrow points RIGHT when rotated */
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important; /* Changed to light background for light theme */
+  color: #181b2a !important; /* Changed to dark text color for light theme */
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important; /* Lighter border for light theme cards */
+  background: #fff !important; /* Light background for light theme cards */
+  color: #181b2a !important; /* Dark text for light theme cards */
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important; /* Dark text for light theme titles */
+  text-shadow: none !important; /* Remove text shadow for light theme */
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #fff !important; /* Light background for light theme cards */
+  color: #181b2a !important; /* Dark text for light theme cards */
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important; /* Dark text for light theme titles */
+  text-shadow: none !important; /* Remove text shadow for light theme */
+}
+
+.back-arrow-oval svg {
+  display: block;
+  transform: scaleX(-1); /* Flips the arrow to point left */
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important; /* Corrected to light background for light theme */
+  color: #181b2a !important; /* Corrected to dark text color for light theme */
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: rgba(0,0,0,0.1) !important; /* Lighter border for light theme cards */
+  background: #f8f8f8 !important; /* Very light background for light theme cards */
+  color: #181b2a !important; /* Dark text for light theme cards */
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important; /* Dark text for light theme titles */
+  text-shadow: none !important; /* Remove text shadow for light theme */
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important; /* Dark text for light theme list items */
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .what-i-do-card {
+  border-color: #e0e0e0 !important;
+  background: #f8f8f8 !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .what-i-do-card .what-i-do-card-title,
+body.light-theme .project-title,
+body.light-theme .skill-card-title,
+body.light-theme .skill-heading-text {
+  color: #181b2a !important;
+  text-shadow: none !important;
+}
+
+body.light-theme .expertise-list li,
+body.light-theme .skill-list li {
+  color: #444 !important;
+}
+
+body.light-theme .expertise-list li::before,
+body.light-theme .skill-list li::before {
+  color: #A259FF !important; /* Accent color for list item markers */
+}
+
+body.light-theme {
+  background: #fff !important;
+  color: #181b2a !important;
+}
+
+body.light-theme .hero,
+body.light-theme .about-section,
+body.light-theme .skills-section,
+body.light-theme .what-i-do-section,
+body.light-theme .featured-works-section,
+body.light-theme .project-card,
+body.light-theme .skill-card,
+body.light-theme .contact-section,
+body.light-theme .contact-form,
+body.light-theme .container {
+  background: #fff !important;
+  color: #181b2a !important;
+  box-shadow: none !important;
+}
+
+.back-arrow-oval svg {
+  display: block;
+  transform: scaleX(-1); /* Flips the arrow to point left */
+}/* FINAL OVERRIDE: Ensure hero last name is visible in light theme */
+body.light-theme .hero-name .last-name {
+  color: #7C2AE8 !important;
+  text-shadow: 0 2px 16px #A259FF33, 0 0 2px #fff !important;
+  -webkit-text-stroke: 0 !important;
+  text-stroke: 0 !important;
+}
+body.light-theme .hero-name .last-name {
+  color: #7C2AE8 !important;
+  -webkit-text-stroke: 0 !important;
+  text-stroke: 0 !important;
+  text-shadow: none !important;
+  font-weight: 900 !important;
+}

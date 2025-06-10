@@ -1,0 +1,1560 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prasidh P Shetty - Web Designer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .about-container {
+            display: flex;
+            gap: 2rem;
+        }
+        .about-geo-structure {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            margin-top: 120px;
+        }
+        #sphere-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .cta-outline {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .cta-outline:hover, .cta-outline:focus {
+            background: #fff;
+            color: #181b2a;
+            box-shadow: 0 4px 32px #fff8;
+            border-color: #fff;
+            outline: none;
+        }
+        
+        .cta-outline:active {
+            transform: scale(0.98);
+            background: transparent;
+            color: #fff;
+            border-color: #fff;
+            box-shadow: none;
+        }
+        
+        .cta-outline::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(162,89,255,0.2) 0%, transparent 70%);
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .cta-outline:active::after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+        }
+
+        /* Update social icons styles */
+        .hero-social-bottom {
+            position: absolute;
+            right: 3rem;
+            bottom: 2.5vw;
+            z-index: 10;
+            display: flex;
+            justify-content: flex-end;
+            width: auto;
+            pointer-events: none;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 2rem;
+            justify-content: flex-end;
+            align-items: center;
+            pointer-events: auto;
+        }
+
+        .social-icons a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(24, 27, 42, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(162, 89, 255, 0.3);
+            box-shadow: 0 0 15px rgba(162, 89, 255, 0.1);
+        }
+
+        .social-icons a::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 14px;
+            padding: 2px;
+            background: linear-gradient(45deg, #A259FF, transparent, #A259FF);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            border-color: #A259FF;
+            box-shadow: 0 0 20px rgba(162, 89, 255, 0.3);
+        }
+
+        .social-icons a:hover::before {
+            opacity: 1;
+        }
+
+        .social-icons a svg {
+            width: 24px;
+            height: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon-x:hover svg {
+            color: #000000;
+            filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.5));
+        }
+
+        .social-icon-github:hover svg {
+            color: #ffffff;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+        }
+
+        .social-icon-instagram:hover svg {
+            color: #E1306C;
+            filter: drop-shadow(0 0 8px rgba(225, 48, 108, 0.5));
+        }
+
+        @media (max-width: 1200px) {
+            .hero-social-bottom {
+                right: 2.5rem;
+                bottom: 2vw;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-social-bottom {
+                bottom: 1.5rem;
+                right: 1.2rem;
+            }
+            .social-icons {
+                gap: 1.2rem;
+            }
+            
+            .social-icons a {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .social-icons a svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-social-bottom {
+                bottom: 0.5rem;
+                right: 0.5rem;
+            }
+        }
+
+        .btn-text {
+            transition: none !important;
+        }
+
+        /* Add a large margin below the footer to increase the gap */
+        footer {
+            margin-bottom: 300px !important;
+        }
+        /* Fixed copyright at the bottom center */
+        .fixed-copyright {
+          position: fixed;
+          left: 50%;
+          bottom: 18px;
+          transform: translateX(-50%);
+          color: #fff;
+          font-size: 1.1rem;
+          background: rgba(24,27,42,0.82);
+          padding: 0.6em 1.6em;
+          border-radius: 2em;
+          box-shadow: 0 0 18px #A259FF44;
+          z-index: 100000;
+          font-family: inherit;
+          font-weight: 500;
+          letter-spacing: 0.02em;
+          pointer-events: none;
+        }
+        /* Copyright centered at the bottom of the contact section */
+        .contact-section {
+          position: relative;
+          min-height: 900px;
+          padding-bottom: 120px;
+        }
+        .contact-copyright {
+          position: absolute;
+          left: 50%;
+          bottom: 180px;
+          transform: translateX(-50%);
+          color: #fff;
+          font-size: 1.1rem;
+          background: rgba(24,27,42,0.82);
+          padding: 0.6em 1.6em;
+          border-radius: 2em;
+          box-shadow: 0 0 18px #A259FF44;
+          z-index: 10;
+          font-family: inherit;
+          font-weight: 500;
+          letter-spacing: 0.02em;
+          pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="ps-logo">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="psGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#A259FF" stop-opacity="0.7"/>
+                            <stop offset="100%" stop-color="#A259FF" stop-opacity="0"/>
+                        </radialGradient>
+                    </defs>
+                    <circle cx="32" cy="32" r="28" fill="#181b2a" stroke="#A259FF" stroke-width="4"/>
+                    <circle cx="32" cy="32" r="30" fill="url(#psGlow)"/>
+                    <text x="50%" y="54%" text-anchor="middle" fill="#A259FF" font-size="2.2rem" font-family="Poppins,Arial,sans-serif" font-weight="900" letter-spacing="-2" dominant-baseline="middle" style="filter: drop-shadow(0 0 8px #A259FF99);">PS</text>
+                </svg>
+            </div>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="main-nav">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#featured-works">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home" class="hero">
+            <canvas id="hero-bg-canvas"></canvas>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="welcome-text">Welcome</div>
+                    <h1 class="hero-name">
+                        <span class="first-name">Prasidh</span><br>
+                        <span class="last-name">P Shetty</span>
+                    </h1>
+                    <div class="hero-title">Web Designer &amp; Developer</div>
+                    <a href="#about" class="cta-outline" onclick="event.preventDefault(); document.querySelector('#about').scrollIntoView({behavior: 'smooth', block: 'start'});">Let's Have a Look</a>
+                </div>
+                <div class="hero-image">
+                    <!-- Large modern monitor SVG with web designing explanation on screen -->
+                    <svg class="monitor-svg" viewBox="0 0 1200 1100" width="1050" height="950" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="monitorGlow" cx="50%" cy="50%" r="80%">
+                                <stop offset="0%" stop-color="#A259FF" stop-opacity="0.18"/>
+                                <stop offset="100%" stop-color="#A259FF" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+                        <ellipse cx="600" cy="1070" rx="470" ry="48" fill="url(#monitorGlow)"/>
+                        <!-- Monitor body -->
+                        <rect x="120" y="120" width="960" height="800" rx="38" fill="#181b2a" stroke="#222" stroke-width="12"/>
+                        <!-- Monitor screen -->
+                        <rect x="170" y="180" width="860" height="700" rx="22" fill="#23263A"/>
+                        <rect x="170" y="180" width="860" height="700" rx="22" fill="url(#monitorGlow)"/>
+                        <!-- Web designing explanation on screen -->
+                        <foreignObject x="220" y="280" width="760" height="440">
+                            <div class="no-theme-invert monitor-content" xmlns="http://www.w3.org/1999/xhtml" style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:none;">
+                                <span class="monitor-heading-anim" style="color:#A259FF;font-weight:900;font-size:4.2rem;margin-bottom:2.2rem;line-height:1.1;">Web Designing</span>
+                                <span class="monitor-typing" id="monitor-typing" style="font-size:2.2rem;line-height:1.3;color:#fff;text-shadow:0 0 12px #A259FF,0 0 4px #fff;"></span>
+                            </div>
+                        </foreignObject>
+                        <!-- Monitor stand -->
+                        <rect x="560" y="960" width="80" height="100" rx="22" fill="#23263A" stroke="#222" stroke-width="6"/>
+                        <rect x="480" y="1070" width="240" height="28" rx="10" fill="#23263A" stroke="#222" stroke-width="4"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="hero-social-bottom">
+                <div class="social-icons">
+                    <a href="https://x.com/ShettyPrasidh7" aria-label="X (Twitter)" class="social-icon-x" target="_blank" rel="noopener">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4l11.733 16h4.267l-11.733 -16z"/>
+                            <path d="M4 20l11.733 -16h4.267l-11.733 16z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/Prasidhpshetty7" aria-label="GitHub" class="social-icon-github" target="_blank" rel="noopener">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/mr__shxtty/" aria-label="Instagram" class="social-icon-instagram" target="_blank" rel="noopener">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="about-container">
+                <div class="about-content">
+                    <h2 class="about-title">ABOUT ME</h2>
+                    <div class="about-description">
+                        <span class="about-highlight">Hello, I'm Prasidh P Shetty</span>, a web and graphic designer with a strong focus on delivering visually compelling and user-centric digital solutions. As a full stack developer, I specialize in building modern, responsive websites and creating impactful brand identities. My approach combines clean design, intuitive interfaces, and technical expertise to transform ideas into effective digital experiences. I am committed to continuous learning, problem-solving, and staying ahead of industry trends to ensure every project achieves its highest potential.
+                    </div>
+                    <button class="about-contact-btn" onclick="event.preventDefault(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth', block: 'start'});">
+                        Contact Me
+                        <span class="about-contact-arrow">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <ellipse cx="14" cy="14" rx="13" ry="13" fill="none" stroke="#A259FF" stroke-width="2.5" filter="url(#glow)"/>
+                                <defs>
+                                    <filter id="glow" x="-8" y="-8" width="44" height="44" filterUnits="userSpaceOnUse">
+                                        <feGaussianBlur stdDeviation="3" result="blur"/>
+                                        <feMerge>
+                                            <feMergeNode in="blur"/>
+                                            <feMergeNode in="SourceGraphic"/>
+                                        </feMerge>
+                                    </filter>
+                                </defs>
+                                <path d="M10 14h8m0 0l-3-3m3 3l-3 3" stroke="#A259FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+                <div class="about-geo-structure">
+                    <canvas id="sphere-canvas"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section">
+            <div class="container">
+                <h2 class="skills-title"><span class="skills-title-text">Skills and Expertise</span></h2>
+                <div class="skills-content">
+                    <div class="skills-grid skills-grid-6">
+                        <div class="skill-card">
+                            <div class="skill-card-title">
+                                <span class="skill-icon">
+                                    <!-- Modern Shield Check SVG -->
+                                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9.5 12.5l2 2l3-3"/></svg>
+                                </span>
+                                <span class="neon-bar"></span>
+                                <span class="skill-heading-text">Frontend Development</span>
+                            </div>
+                            <ul class="skill-list">
+                                <li>HTML5</li>
+                                <li>CSS3</li>
+                                <li>JavaScript</li>
+                                <li>ReactJS</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-card-title">
+                                <span class="skill-icon">
+                                    <!-- Modern Code Brackets SVG -->
+                                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                                </span>
+                                <span class="neon-bar"></span>
+                                <span class="skill-heading-text">Backend Development</span>
+                            </div>
+                            <ul class="skill-list">
+                                <li>NodeJS</li>
+                                <li>ExpressJS</li>
+                                <li>REST APIs</li>
+                                <li>Authentication</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-card-title">
+                                <span class="skill-icon">
+                                    <!-- Modern Cloud SVG -->
+                                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 5.5 5.5 0 0 0-10.9 1.5A4.5 4.5 0 0 0 6.5 19h11z"/><path d="M16 16v-2a4 4 0 0 0-4-4H8" opacity=".5"/></svg>
+                                </span>
+                                <span class="neon-bar"></span>
+                                <span class="skill-heading-text">Cloud & Deployment</span>
+                            </div>
+                            <ul class="skill-list">
+                                <li>Docker</li>
+                                <li>CI/CD</li>
+                                <li>Netlify</li>
+                                <li>Vercel</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-card-title">
+                                <span class="skill-icon">
+                                    <!-- Modern Database SVG -->
+                                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/><path d="M7 10v4m4-2v4m4-4v4" opacity=".5"/></svg>
+                                </span>
+                                <span class="neon-bar"></span>
+                                <span class="skill-heading-text">Databases</span>
+                            </div>
+                            <ul class="skill-list">
+                                <li>MongoDB</li>
+                                <li>MySQL</li>
+                                <li>PostgreSQL</li>
+                                <li>Database Design</li>
+                                <li>Firebase</li>
+                                <li>SQLite</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-card-title">
+                                <span class="skill-icon">
+                                    <!-- Modern Workflow SVG (Git Merge) -->
+                                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9h3"/></svg>
+                                </span>
+                                <span class="neon-bar"></span>
+                                <span class="skill-heading-text">Tools & Workflow</span>
+                            </div>
+                            <ul class="skill-list">
+                                <li>Git</li>
+                                <li>GitHub</li>
+                                <li>Linux</li>
+                                <li>Postman</li>
+                                <li>Visual Studio Code</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-card-title">
+                                <span class="skill-icon">
+                                    <!-- Modern User Star SVG -->
+                                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/><polygon points="17 11 19 13 21 11 19 9 17 11"/></svg>
+                                </span>
+                                <span class="neon-bar"></span>
+                                <span class="skill-heading-text">Development Practices</span>
+                            </div>
+                            <ul class="skill-list">
+                                <li>Agile Methodologies</li>
+                                <li>Version Control Strategies</li>
+                                <li>Automated Testing Pipelines</li>
+                                <li>Code Quality &amp; Maintainability</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What I Do Section -->
+        <section id="what-i-do" class="what-i-do-section">
+            <div class="container">
+                <h2 class="what-i-do-title" data-text="Technical Expertise"><span class="what-i-do-title-main">Technical Expertise</span><span class="what-i-do-title-reflection">Technical Expertise</span></h2>
+                <div class="what-i-do-grid">
+                    <div class="what-i-do-card">
+                        <div class="neon-overlay"></div>
+                        <div class="what-i-do-icon">
+                            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                <path d="M17 3.5l5 2.5"/>
+                                <path d="M17 8.5l5 2.5"/>
+                                <path d="M17 13.5l5 2.5"/>
+                            </svg>
+                        </div>
+                        <h3 class="what-i-do-card-title">Full-Stack Development</h3>
+                        <p>Architecting and building robust, scalable web applications with modern technologies. From intuitive user interfaces to powerful backend systems, I deliver complete solutions that drive business growth.</p>
+                        <ul class="expertise-list">
+                            <li>Frontend Architecture</li>
+                            <li>Backend Development</li>
+                            <li>Database Design</li>
+                            <li>System Architecture</li>
+                        </ul>
+                    </div>
+                    <div class="what-i-do-card">
+                        <div class="neon-overlay"></div>
+                        <div class="what-i-do-icon">
+                            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                                <path d="M8 12l4 4 4-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="what-i-do-card-title">System Integration</h3>
+                        <p>Designing and implementing seamless system integrations and APIs that enable efficient communication between different platforms. I ensure robust, secure, and scalable solutions for complex technical challenges.</p>
+                        <ul class="expertise-list">
+                            <li>API Development</li>
+                            <li>Microservices</li>
+                            <li>Third-party Integration</li>
+                            <li>System Architecture</li>
+                        </ul>
+                    </div>
+                    <div class="what-i-do-card">
+                        <div class="neon-overlay"></div>
+                        <div class="what-i-do-icon">
+                            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17.5 19a4.5 4.5 0 0 0 0-9 5.5 5.5 0 0 0-10.9 1.5A4.5 4.5 0 0 0 6.5 19h11z"/>
+                                <path d="M8 12h2v2H8z" stroke-width="1.2"/>
+                                <path d="M14 12h2v2h-2z" stroke-width="1.2"/>
+                                <path d="M11 9h2v2h-2z" stroke-width="1.2"/>
+                                <path d="M11 15h2v2h-2z" stroke-width="1.2"/>
+                                <path d="M10 10h4M10 14h4M12 11v2M8 13h2M14 13h2" stroke-width="1.2"/>
+                                <path d="M12 7l-2 4h3l-2 4" stroke-width="1.8" stroke-linejoin="miter"/>
+                                <path d="M19 5l2 2-2 2M5 19l-2-2 2-2" stroke-width="1.2" opacity="0.6"/>
+                                <path d="M19 19l2-2-2-2M5 5l-2 2 2 2" stroke-width="1.2" opacity="0.6"/>
+                            </svg>
+                        </div>
+                        <h3 class="what-i-do-card-title">DevOps & Optimization</h3>
+                        <p>Implementing modern DevOps practices and performance optimizations to ensure fast, secure, and reliable application delivery. From cloud deployment to continuous integration, I optimize the entire development lifecycle.</p>
+                        <ul class="expertise-list">
+                            <li>Cloud Deployment</li>
+                            <li>CI/CD Pipeline</li>
+                            <li>Performance Optimization</li>
+                            <li>Security Implementation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Works Section -->
+        <section id="featured-works" class="featured-works-section">
+            <div class="container">
+                <h2 class="featured-works-title"><span class="featured-works-title-text">Featured Works</span></h2>
+                <div class="featured-works-list">
+                    <!-- Project 1 -->
+                    <div class="project-card project-purple" tabindex="0" aria-label="SlateCore CMS">
+                      <div class="neon-shine"></div>
+                      <div class="project-logo" style="display:flex;align-items:center;justify-content:center;margin-bottom:0.7rem;">
+                        <!-- Shield Icon for SlateCore (Purple) -->
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#A259FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="background:#23263A;border-radius:12px;padding:6px;box-shadow:0 0 16px #A259FF55;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9.5 12.5l2 2l3-3"/></svg>
+                      </div>
+                      <div class="project-content">
+                          <h3 class="project-title"><span class="project-main-word">SLATECORE</span> CMS — Custom Headless Content Management Engine</h3>
+                      </div>
+                      <a class="project-arrow-link" href="slatecore-cms.html" style="position: absolute; right: 2.2rem; top: 50%; transform: translateY(-50%); z-index: 2;" aria-label="Read more about SlateCore CMS">
+                        <span class="project-arrow-oval">
+                          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="14" cy="14" rx="13" ry="13" fill="none" stroke="#A259FF" stroke-width="2.5"/>
+                            <path d="M12 10l4 4-4 4" stroke="#A259FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="project-card project-orange" tabindex="0" aria-label="AltumCV">
+                      <div class="neon-shine"></div>
+                      <div class="project-logo" style="display:flex;align-items:center;justify-content:center;margin-bottom:0.7rem;">
+                        <!-- User Icon for AltumCV (Orange) -->
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#FF9F43" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="background:#23263A;border-radius:12px;padding:6px;box-shadow:0 0 16px #FF9F4355;"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/></svg>
+                      </div>
+                      <div class="project-content">
+                          <h3 class="project-title"><span class="project-main-word">ALTUMCV</span> — AI-Driven Resume Intelligence Platform</h3>
+                      </div>
+                      <a class="project-arrow-link" href="corecred.html" style="position: absolute; right: 2.2rem; top: 50%; transform: translateY(-50%); z-index: 2;" aria-label="Read more about AltumCV">
+                        <span class="project-arrow-oval">
+                          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="14" cy="14" rx="13" ry="13" fill="none" stroke="#A259FF" stroke-width="2.5"/>
+                            <path d="M12 10l4 4-4 4" stroke="#A259FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="project-card project-green" tabindex="0" aria-label="CommerciaX">
+                      <div class="neon-shine"></div>
+                      <div class="project-logo" style="display:flex;align-items:center;justify-content:center;margin-bottom:0.7rem;">
+                        <!-- Cart Icon for CommerciaX (Green) -->
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="background:#23263A;border-radius:12px;padding:6px;box-shadow:0 0 16px #4CAF5055;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61l1.38-7.39H6.5"/></svg>
+                      </div>
+                      <div class="project-content">
+                          <h3 class="project-title"><span class="project-main-word">COMMERCIAX</span> — Scalable Multi-Vendor E-commerce Ecosystem</h3>
+                      </div>
+                      <a class="project-arrow-link" href="commerciax.html" style="position: absolute; right: 2.2rem; top: 50%; transform: translateY(-50%); z-index: 2;" aria-label="Read more about CommerciaX">
+                        <span class="project-arrow-oval">
+                          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="14" cy="14" rx="13" ry="13" fill="none" stroke="#A259FF" stroke-width="2.5"/>
+                            <path d="M12 10l4 4-4 4" stroke="#A259FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+                    <!-- Project 4 -->
+                    <div class="project-card project-black" tabindex="0" aria-label="SignalFlow">
+                      <div class="neon-shine"></div>
+                      <div class="project-logo" style="display:flex;align-items:center;justify-content:center;margin-bottom:0.7rem;">
+                        <!-- Message Icon for SignalFlow (Gray/Black) -->
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="background:#23263A;border-radius:12px;padding:6px;box-shadow:0 0 16px #8888;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                      </div>
+                      <div class="project-content">
+                          <h3 class="project-title"><span class="project-main-word">SIGNALFLOW</span> — Real-Time Messaging Infrastructure</h3>
+                      </div>
+                      <a class="project-arrow-link" href="signalflow.html" style="position: absolute; right: 2.2rem; top: 50%; transform: translateY(-50%); z-index: 2;" aria-label="Read more about SignalFlow">
+                        <span class="project-arrow-oval">
+                          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="14" cy="14" rx="13" ry="13" fill="none" stroke="#A259FF" stroke-width="2.5"/>
+                            <path d="M12 10l4 4-4 4" stroke="#A259FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </span>
+                      </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Featured Works Section -->
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="contact-container">
+                <div class="contact-left">
+                    <h2 class="contact-title"><span class="contact-title-text" data-text="GET IN TOUCH">GET IN TOUCH</span><div class="contact-title-underline"></div></h2>
+                    <div class="contact-message"><span class="contact-typing"></span></div>
+                    <div class="contact-socials">
+                        <a href="mailto:shettyprasidh262@gmail.com" class="contact-email-btn" aria-label="Email" target="_blank">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="M2 6l10 7l10-7"/></svg>
+                        </a>
+                    </div>
+                    </div>
+                <div class="contact-right">
+                    <form class="contact-form" id="contactForm">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                        <input type="hidden" name="_subject" value="New message from portfolio contact form">
+                        <button type="submit" class="submit-button">
+                          <span class="btn-text">Send Message</span>
+                          <span class="btn-paper">
+                            <span class="btn-paper-text">Send Message</span>
+                          </span>
+                          <span class="btn-envelope">
+                            <svg class="envelope-svg" width="48" height="32" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <rect class="envelope-body" x="4" y="12" width="40" height="16" rx="3" fill="#A259FF" stroke="#fff" stroke-width="2"/>
+                              <polygon class="envelope-flap" points="4,12 24,2 44,12" fill="#fff"/>
+                            </svg>
+                          </span>
+                          <span class="btn-loading" style="display:none;"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
+                        </button>
+                        <div class="form-success-message" style="display:none;color:#A259FF;margin-top:1.2em;font-weight:600;text-align:center;"></div>
+                </form>
+                </div>
+            </div>
+        </section>
+        <!-- Add copyright below the contact-container, at the bottom of the contact section -->
+        <div class="contact-copyright-bottom">&copy; 2024 Prasidh P Shetty. All rights reserved.</div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <!-- Copyright moved to fixed position -->
+        </div>
+    </footer>
+
+    <script>
+    // Animated background for hero section
+    const canvas = document.getElementById('hero-bg-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = canvas.offsetWidth;
+      let height = canvas.height = canvas.offsetHeight;
+      let mouse = { x: width/2, y: height/2 };
+      const shapes = [];
+      const SHAPE_COUNT = 66;
+      const COLORS = [
+        'rgba(162,89,255,0.13)', // neon purple
+        'rgba(162,89,255,0.09)',
+        'rgba(200,200,220,0.07)', // soft gray
+        'rgba(162,89,255,0.07)'
+      ];
+
+      function randomBetween(a, b) { return a + Math.random() * (b - a); }
+
+      function createShape() {
+        const isPolygon = Math.random() > 0.5;
+        return {
+          x: randomBetween(0, width),
+          y: randomBetween(0, height),
+          r: randomBetween(18, 60),
+          sides: isPolygon ? Math.floor(randomBetween(5, 8)) : 0,
+          angle: randomBetween(0, Math.PI * 2),
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          speed: randomBetween(0.01, 0.04),
+          offset: randomBetween(0, Math.PI * 2),
+          isPolygon
+        };
+      }
+
+      function resize() {
+        width = canvas.width = canvas.offsetWidth;
+        height = canvas.height = canvas.offsetHeight;
+      }
+      window.addEventListener('resize', resize);
+
+      canvas.width = width;
+      canvas.height = height;
+
+      for (let i = 0; i < SHAPE_COUNT; i++) shapes.push(createShape());
+
+      document.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+
+      function drawPolygon(x, y, r, sides, angle, color) {
+        ctx.save();
+        ctx.beginPath();
+        for (let i = 0; i < sides; i++) {
+          const theta = angle + i * 2 * Math.PI / sides;
+          ctx.lineTo(x + r * Math.cos(theta), y + r * Math.sin(theta));
+        }
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.shadowColor = color;
+        ctx.shadowBlur = 18;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawCircle(x, y, r, color) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.shadowColor = color;
+        ctx.shadowBlur = 18;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        // Repel shapes from each other
+        for (let i = 0; i < shapes.length; i++) {
+          let s = shapes[i];
+          for (let j = 0; j < shapes.length; j++) {
+            if (i === j) continue;
+            let o = shapes[j];
+            let dx = s.x - o.x;
+            let dy = s.y - o.y;
+            let dist = Math.sqrt(dx*dx + dy*dy);
+            let minDist = s.r + o.r - 10;
+            if (dist < minDist && dist > 0) {
+              let repel = (minDist - dist) * 0.015;
+              s.x += (dx / dist) * repel;
+              s.y += (dy / dist) * repel;
+            }
+          }
+        }
+        for (let i = 0; i < shapes.length; i++) {
+          const s = shapes[i];
+          // Move each shape slightly toward the mouse, with a trailing effect
+          s.x += (mouse.x + Math.cos(s.offset) * 80 - s.x) * s.speed;
+          s.y += (mouse.y + Math.sin(s.offset) * 80 - s.y) * s.speed;
+          s.angle += 0.002 * (i % 2 === 0 ? 1 : -1);
+          if (s.isPolygon) {
+            drawPolygon(s.x, s.y, s.r, s.sides, s.angle, s.color);
+          } else {
+            drawCircle(s.x, s.y, s.r, s.color);
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    // Typing effect for monitor description
+    window.addEventListener('DOMContentLoaded', function() {
+      const text = "A web designer creates visually engaging, user-friendly websites by combining creativity, layout, color, and typography. They focus on both aesthetics and usability, ensuring every site is responsive, accessible, and delivers a seamless experience across all devices.";
+      const typingEl = document.getElementById('monitor-typing');
+      if (!typingEl) return;
+      let i = 0;
+      function type() {
+        typingEl.innerHTML = text.slice(0, i) + '<span class="typing-cursor">|</span>';
+        typingEl.style.opacity = 1;
+        if (i < text.length) {
+          i++;
+          setTimeout(type, 8.5); // fast typing
+        } else {
+          typingEl.innerHTML = text + '<span class="typing-cursor"> </span>';
+        }
+      }
+      setTimeout(type, 2700); // start after heading anim
+    });
+
+    // 3D Spherical Wireframe Globe (Canvas)
+    (function() {
+        const canvas = document.getElementById('sphere-canvas');
+        if (!canvas) return;
+        
+        canvas.width = 600;
+        canvas.height = 600;
+        
+        const ctx = canvas.getContext('2d');
+        const w = canvas.width;
+        const h = canvas.height;
+        const cx = w/2;
+        const cy = h/2;
+        const R = 220;
+        const lonLines = 48;
+        let rotX = 0, rotY = Math.PI / 2;
+        let dragging = false, lastX = 0, lastY = 0;
+
+        function draw() {
+            ctx.clearRect(0, 0, w, h);
+            
+            // Glow
+            ctx.save();
+            ctx.globalAlpha = 0.18;
+            ctx.shadowColor = '#A259FF';
+            ctx.shadowBlur = 48;
+            ctx.beginPath();
+            ctx.arc(cx, cy, R+10, 0, Math.PI*2);
+            ctx.strokeStyle = '#A259FF';
+            ctx.lineWidth = 16;
+            ctx.stroke();
+            ctx.restore();
+
+            // Lines
+            ctx.save();
+            ctx.strokeStyle = '#A259FF';
+            ctx.globalAlpha = 0.92;
+            ctx.lineWidth = 2.8;
+            
+            for (let i = 0; i < lonLines; i++) {
+                let lon = (360/lonLines)*i;
+                ctx.beginPath();
+                for (let j = 0; j <= 48; j++) {
+                    let lat = -90 + (180/48)*j;
+                    lat = lat * Math.PI / 180;
+                    let lonRad = lon * Math.PI / 180;
+                    let x = R * Math.cos(lat) * Math.sin(lonRad);
+                    let y = R * Math.sin(lat);
+                    let z = R * Math.cos(lat) * Math.cos(lonRad);
+                    
+                    // Rotate X
+                    let y1 = y * Math.cos(rotX) - z * Math.sin(rotX);
+                    let z1 = y * Math.sin(rotX) + z * Math.cos(rotX);
+                    
+                    // Rotate Y
+                    let x2 = x * Math.cos(rotY) - z1 * Math.sin(rotY);
+                    let z2 = x * Math.sin(rotY) + z1 * Math.cos(rotY);
+                    
+                    // Project
+                    const scale = 1.1;
+                    const persp = 700;
+                    let px = cx + scale * persp * x2 / (persp - z2);
+                    let py = cy + scale * persp * y1 / (persp - z2);
+                    
+                    if (j === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+                ctx.shadowColor = '#A259FF';
+                ctx.shadowBlur = 16;
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
+        // Mouse/Touch events
+        canvas.addEventListener('mousedown', e => {
+            dragging = true;
+            lastX = e.clientX;
+            lastY = e.clientY;
+            document.body.style.cursor = 'grabbing';
+        });
+
+        window.addEventListener('mousemove', e => {
+            if (!dragging) return;
+            let dx = e.clientX - lastX;
+            let dy = e.clientY - lastY;
+            rotY += dx * 0.01;
+            rotX += dy * 0.01;
+            rotX = Math.max(-Math.PI/2, Math.min(Math.PI/2, rotX));
+            lastX = e.clientX;
+            lastY = e.clientY;
+            draw();
+        });
+
+        window.addEventListener('mouseup', () => {
+            dragging = false;
+            document.body.style.cursor = '';
+        });
+
+        canvas.addEventListener('touchstart', e => {
+            dragging = true;
+            lastX = e.touches[0].clientX;
+            lastY = e.touches[0].clientY;
+        });
+
+        window.addEventListener('touchmove', e => {
+            if (!dragging) return;
+            let dx = e.touches[0].clientX - lastX;
+            let dy = e.touches[0].clientY - lastY;
+            rotY += dx * 0.01;
+            rotX += dy * 0.01;
+            rotX = Math.max(-Math.PI/2, Math.min(Math.PI/2, rotX));
+            lastX = e.touches[0].clientX;
+            lastY = e.touches[0].clientY;
+            draw();
+        });
+
+        window.addEventListener('touchend', () => {
+            dragging = false;
+        });
+
+        draw();
+    })();
+    </script>
+
+    <script>
+    // Global function to start all page animations
+    function startPageAnimations() {
+        // Hero section animations
+        const welcomeText = document.querySelector('.welcome-text');
+        const heroName = document.querySelector('.hero-name');
+        const heroTitle = document.querySelector('.hero-title');
+        const monitorHeading = document.querySelector('.monitor-heading-anim');
+        const monitorTyping = document.getElementById('monitor-typing');
+        const socialIcons = document.querySelectorAll('.hero-social-bottom .social-icons a');
+
+        // Start hero animations
+        if (welcomeText) welcomeText.classList.add('animated');
+        setTimeout(() => {
+            if (heroName) heroName.classList.add('animated');
+        }, 300);
+        setTimeout(() => {
+            if (heroTitle) heroTitle.classList.add('animated');
+        }, 600);
+        setTimeout(() => {
+            if (monitorHeading) monitorHeading.classList.add('animated');
+        }, 900);
+        setTimeout(() => {
+            if (monitorTyping) {
+                const text = "A web designer creates visually engaging, user-friendly websites by combining creativity, layout, color, and typography. They focus on both aesthetics and usability, ensuring every site is responsive, accessible, and delivers a seamless experience across all devices.";
+                let i = 0;
+                function type() {
+                    monitorTyping.innerHTML = text.slice(0, i) + '<span class="typing-cursor">|</span>';
+                    monitorTyping.style.opacity = 1;
+                    if (i < text.length) {
+                        i++;
+                        setTimeout(type, 8.5);
+                    } else {
+                        monitorTyping.innerHTML = text + '<span class="typing-cursor"> </span>';
+                    }
+                }
+                type();
+            }
+        }, 2700);
+
+        // Social icons animation
+        socialIcons.forEach((icon, index) => {
+            setTimeout(() => {
+                icon.classList.add('animated');
+            }, 2000 + (index * 200));
+        });
+
+        // Contact section typing animation
+        setTimeout(() => {
+            const text = "Let's build something amazing together — drop me a message and let's connect!";
+            const typingEl = document.querySelector('.contact-typing');
+            if (!typingEl) return;
+            let i = 0;
+            function type() {
+                typingEl.innerHTML = text.slice(0, i) + '<span class="typing-cursor">|</span>';
+                typingEl.style.opacity = 1;
+                if (i < text.length) {
+                    i++;
+                    setTimeout(type, 10);
+                } else {
+                    typingEl.innerHTML = text + '<span class="typing-cursor"> </span>';
+                }
+            }
+            type();
+        }, 400);
+
+        // Initialize scroll-triggered animations for all sections
+        initScrollAnimations();
+    }
+
+    // Start animations when page loads
+    window.addEventListener('DOMContentLoaded', function() {
+        startPageAnimations();
+        initScrollAnimations();
+    });
+
+    // Scroll-triggered animations for all sections
+    function initScrollAnimations() {
+        // About Section
+    const aboutSection = document.querySelector('.about-section');
+    const aboutElements = {
+        title: document.querySelector('.about-title'),
+        description: document.querySelector('.about-description'),
+        email: document.querySelector('.about-email'),
+        sphere: document.querySelector('.about-geo-structure')
+    };
+        if (aboutSection) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                Object.values(aboutElements).forEach(el => {
+                    if (el) {
+                        el.style.animation = 'none';
+                                el.offsetHeight;
+                        el.style.animation = null;
+                                el.classList.add('animated');
+                    }
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '0px'
+    });
+        observer.observe(aboutSection);
+    }
+
+        // Skills Section
+      const skillsSection = document.querySelector('.skills-section');
+      const skillsTitle = document.querySelector('.skills-title');
+      const skillCards = document.querySelectorAll('.skill-card');
+      if (skillsSection && skillsTitle && skillCards.length) {
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              skillsTitle.classList.add('animated');
+              skillCards.forEach(card => card.classList.add('animated'));
+              observer.disconnect();
+            }
+          });
+        }, {
+          threshold: 0.2
+        });
+        observer.observe(skillsSection);
+      }
+
+        // What I Do Section
+        const mainContent = document.querySelector('.what-i-do-section');
+      if (mainContent) {
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              mainContent.classList.add('animated');
+              observer.disconnect();
+            }
+          });
+        }, {
+          threshold: 0.2
+        });
+        observer.observe(mainContent);
+      }
+
+        // Featured Works Section
+      const fwSection = document.querySelector('.featured-works-section');
+      const fwTitle = document.querySelector('.featured-works-title');
+      const fwCards = document.querySelectorAll('.featured-works-list .project-card');
+      if (fwSection && fwTitle && fwCards.length) {
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              fwTitle.classList.add('animated');
+              fwCards.forEach((card, i) => {
+                setTimeout(() => {
+                  card.classList.add('fw-animate-in');
+                  setTimeout(() => {
+                    card.classList.remove('fw-animate-in');
+                    card.classList.add('fw-animate-in-done');
+                    setTimeout(() => {
+                      card.classList.remove('fw-animate-in-done');
+                    }, 700);
+                  }, 900);
+                }, 220 * i);
+              });
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.2 });
+        observer.observe(fwSection);
+        }
+
+        // Contact Section
+        const contactSection = document.querySelector('.contact-section');
+        const contactTitle = document.querySelector('.contact-title');
+        const contactMsg = document.querySelector('.contact-message');
+        const contactLeft = document.querySelector('.contact-left');
+        const contactRight = document.querySelector('.contact-right');
+        if (contactSection) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (contactTitle) contactTitle.classList.add('animated');
+                        setTimeout(() => {
+                            if (contactMsg) contactMsg.classList.add('animated');
+                        }, 250);
+                        setTimeout(() => {
+                            if (contactLeft) contactLeft.classList.add('animated');
+                        }, 600);
+                        setTimeout(() => {
+                            if (contactRight) contactRight.classList.add('animated');
+                        }, 900);
+                        setTimeout(() => {
+                            if (contactLeft) contactLeft.classList.add('contact-animate-hover');
+                            if (contactRight) contactRight.classList.add('contact-animate-hover');
+                            const msgIcon = document.querySelector('.msg-icon');
+                            if (msgIcon) msgIcon.classList.add('contact-animate-hover');
+                        }, 1800);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+            observer.observe(contactSection);
+        }
+    }
+    </script>
+
+    <script>
+    // Contact form AJAX submission
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contactForm');
+      const successMsg = form.querySelector('.form-success-message');
+      const submitBtn = form.querySelector('.submit-button');
+      const btnText = submitBtn.querySelector('.btn-text');
+      const btnPaper = submitBtn.querySelector('.btn-paper');
+      const btnEnvelope = submitBtn.querySelector('.btn-envelope');
+      const btnLoading = submitBtn.querySelector('.btn-loading');
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const message = form.message.value.trim();
+        if (!name || !email || !message) return;
+        // Start animation sequence
+        submitBtn.disabled = true;
+        submitBtn.classList.add('sending');
+        btnText.style.opacity = '0'; // Hide text immediately
+        btnLoading.style.display = 'none';
+        // Step 1: Shrink text (duration: 200ms)
+        setTimeout(() => {
+          submitBtn.classList.remove('sending');
+          submitBtn.classList.add('paper-in');
+          // Step 2: Show paper, slide in (duration: 700ms)
+          setTimeout(() => {
+            submitBtn.classList.remove('paper-in');
+            submitBtn.classList.add('flap-close');
+            // Step 3: Show envelope, close flap (duration: 600ms)
+            setTimeout(() => {
+              submitBtn.classList.remove('flap-close');
+              submitBtn.classList.add('envelope-fly');
+              // Step 4: Envelope flies away (duration: 1700ms)
+              setTimeout(() => {
+                submitBtn.classList.remove('envelope-fly');
+                submitBtn.classList.add('done');
+                btnText.style.display = 'none'; // Hide text
+                btnLoading.style.display = 'flex'; // Show loading dots
+
+                // Send the message in the background
+                (async () => {
+                  let sent = false;
+                  try {
+                    const res = await fetch('http://localhost:3001/api/contact', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ name, email, message })
+                    });
+                    sent = res.ok;
+                  } catch (err) {}
+                  let iconHTML = '';
+                  let msgText = '';
+                  if (!sent) {
+                    iconHTML = '<span class="msg-icon msg-error">\
+                      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">\
+                        <circle cx="11" cy="11" r="10" fill="#ff3b3b"/><path d="M7 7l8 8M15 7l-8 8" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>\
+                    </span>';
+                    msgText = 'Sorry, there was a problem sending your message.';
+                  } else {
+                    iconHTML = '<span class="msg-icon msg-success">\
+                      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">\
+                        <circle cx="11" cy="11" r="10" fill="#2ecc40"/><path d="M7 12l3 3 5-5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>\
+                    </span>';
+                    msgText = 'Thank you! Your message has been sent.';
+                  }
+                  successMsg.innerHTML = iconHTML + msgText;
+                  successMsg.style.display = 'block';
+                  form.reset();
+                })();
+
+                btnLoading.style.display = 'none'; // Hide loading dots
+                btnText.style.display = 'inline-block'; // Show text
+                btnText.style.opacity = '1';
+                submitBtn.classList.remove('done');
+                submitBtn.disabled = false;
+              }, 1700); // envelope fly duration
+            }, 600); // flap close duration
+          }, 700); // paper slide duration
+        }, 200); // shrink text duration
+      });
+    });
+    </script>
+
+    <script>
+    // Fast typing effect for contact description
+    window.addEventListener('DOMContentLoaded', function() {
+      const text = "Let's build something amazing together — drop me a message and let's connect!";
+      const typingEl = document.querySelector('.contact-typing');
+      if (!typingEl) return;
+      let i = 0;
+      function type() {
+        typingEl.innerHTML = text.slice(0, i) + '<span class="typing-cursor">|</span>';
+        typingEl.style.opacity = 1;
+        if (i < text.length) {
+          i++;
+          setTimeout(type, 10); // fast typing
+        } else {
+          typingEl.innerHTML = text + '<span class="typing-cursor"> </span>';
+        }
+      }
+      setTimeout(type, 400); // start after heading anim
+    });
+    </script>
+
+    <script>
+    // Loading Screen Handler
+    window.addEventListener('load', function() {
+        // Ensure minimum display time of 1.5 seconds
+        const minLoadTime = 1500;
+        const startTime = performance.now();
+        
+        // Hide all content initially
+        document.body.classList.remove('loaded');
+        
+        function removeLoadingScreen() {
+            const loadingScreen = document.querySelector('.loading-screen');
+            const body = document.body;
+            
+            // Add fade-out class to loading screen
+            loadingScreen.classList.add('fade-out');
+            
+            // Add loaded class to body to show main content
+            body.classList.add('loaded');
+            
+            // Start all page animations after loading screen
+            startPageAnimations();
+            
+            // Remove loading screen from DOM after fade-out
+            setTimeout(() => {
+                loadingScreen.remove();
+                // Now initialize scroll-triggered animations
+                initScrollAnimations();
+                // Force a scroll event to recalculate viewport
+                window.scrollBy(0, 1);
+                window.scrollBy(0, -1);
+            }, 500);
+        }
+        
+        // Calculate remaining time to ensure minimum display
+        const elapsedTime = performance.now() - startTime;
+        const remainingTime = Math.max(0, minLoadTime - elapsedTime);
+        
+        // Remove loading screen after minimum time
+        setTimeout(removeLoadingScreen, remainingTime);
+    });
+    </script>
+
+    <script>
+    // Water fill animation for loading sphere
+    window.addEventListener('DOMContentLoaded', function() {
+        const path = document.getElementById('liquid-fill');
+        if (!path) return;
+        const cx = 110, cy = 110, r = 100;
+        const duration = 1500; // ms
+        const start = performance.now();
+        function wavePath(level, t) {
+            // level: 0 (bottom) to 1 (top)
+            // t: time for wave phase
+            const points = 40;
+            const waveHeight = 8 + 6 * Math.sin(t/180*Math.PI);
+            const waveLength = 2 * Math.PI / points;
+            const yBase = cy + r - 2 * r * level;
+            let d = `M${cx - r},${cy + r} `;
+            d += `L${cx - r},${yBase}`;
+            for (let i = 0; i <= points; i++) {
+                const x = cx - r + (2 * r * i) / points;
+                const theta = t/180*Math.PI + i * waveLength;
+                const y = yBase - Math.sin(theta) * waveHeight * (1 - level);
+                d += `L${x},${y}`;
+            }
+            d += `L${cx + r},${cy + r} Z`;
+            return d;
+        }
+        function animate(now) {
+            let elapsed = now - start;
+            let progress = Math.min(elapsed / duration, 1);
+            let t = elapsed * 2; // wave phase
+            path.setAttribute('d', wavePath(progress, t));
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                path.setAttribute('d', wavePath(1, t));
+            }
+        }
+        animate(start);
+    });
+    </script>
+
+    <script>
+    // Maximum strictness: Block all scroll, keyboard, touch, and visually cover anything below the footer
+    document.addEventListener('DOMContentLoaded', function() {
+      const footer = document.querySelector('footer');
+      // Overlay to cover anything below the footer
+      const overlay = document.createElement('div');
+      overlay.style.position = 'fixed';
+      overlay.style.left = 0;
+      overlay.style.right = 0;
+      overlay.style.bottom = 0;
+      overlay.style.height = '100vh';
+      overlay.style.background = 'linear-gradient(to bottom, transparent 0%, rgba(24,27,42,0.12) 80%, rgba(24,27,42,0.18) 100%)';
+      overlay.style.pointerEvents = 'none';
+      overlay.style.zIndex = 99999;
+      overlay.style.display = 'none';
+      document.body.appendChild(overlay);
+
+      function getMaxScroll() {
+        // Subtract extra 150px to stop even further above any stray content
+        return footer.offsetTop + footer.offsetHeight - window.innerHeight - 150;
+      }
+      function blockPastFooter() {
+        const maxScroll = getMaxScroll();
+        if (window.scrollY > maxScroll) {
+          window.scrollTo({ top: maxScroll, behavior: 'auto' });
+        }
+        // Show overlay if at max scroll
+        if (window.scrollY >= maxScroll - 2) {
+          overlay.style.display = 'block';
+        } else {
+          overlay.style.display = 'none';
+        }
+      }
+      // Mouse/touch scroll
+      window.addEventListener('scroll', blockPastFooter, { passive: false });
+      window.addEventListener('resize', blockPastFooter);
+      // Keyboard navigation
+      window.addEventListener('keydown', function(e) {
+        const keys = ['ArrowDown', 'PageDown', 'Space', 'End', 'Tab'];
+        if (keys.includes(e.code) || keys.includes(e.key)) {
+          const maxScroll = getMaxScroll();
+          if (window.scrollY >= maxScroll) {
+            e.preventDefault();
+            window.scrollTo({ top: maxScroll, behavior: 'auto' });
+          }
+        }
+      }, { passive: false });
+      // Touch move (mobile)
+      window.addEventListener('touchmove', function() {
+        blockPastFooter();
+      }, { passive: false });
+      // Animation frame lock
+      function rafLock() {
+        blockPastFooter();
+        requestAnimationFrame(rafLock);
+      }
+      rafLock();
+      // Prevent tabbing/focus below footer
+      document.addEventListener('focusin', function(e) {
+        const maxScroll = getMaxScroll();
+        if (window.scrollY >= maxScroll) {
+          e.preventDefault();
+          window.scrollTo({ top: maxScroll, behavior: 'auto' });
+          if (footer) footer.focus();
+        }
+      });
+      // Run once on load
+      blockPastFooter();
+    });
+    </script>
+
+    <script>
+    // Transparent navbar on scroll
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (!header) return;
+      if (window.scrollY > 24) {
+        header.classList.add('header-transparent');
+      } else {
+        header.classList.remove('header-transparent');
+      }
+    });
+    </script>
+
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      // Force heading animation to replay
+      const title = document.querySelector('.project-detail-title');
+      if (title) {
+        title.classList.remove('animated');
+        void title.offsetWidth; // trigger reflow
+        title.classList.add('animated');
+      }
+      document.querySelector('.project-description')?.classList.add('animated');
+      document.querySelector('.project-stack')?.classList.add('animated');
+      document.querySelector('.project-image-entrance')?.classList.add('animated');
+      setTimeout(function() {
+        document.querySelector('.back-to-featured-btn')?.classList.add('animated');
+      }, 500);
+    });
+    </script>
+
+    <script>
+    // Hamburger Menu
+    const hamburger = document.querySelector('.hamburger-menu');
+    const mainNav = document.querySelector('.main-nav');
+    const navLinks = document.querySelectorAll('.main-nav a');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mainNav.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mainNav.classList.remove('active');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !mainNav.contains(e.target)) {
+            hamburger.classList.remove('active');
+            mainNav.classList.remove('active');
+        }
+    });
+    </script>
+
+    <script>
+    // Sidebar open/close logic
+    const themeArrowBtn = document.querySelector('.theme-arrow-btn');
+    const themeSidebar = document.querySelector('.theme-sidebar');
+    const themeToggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+
+    function closeSidebar() {
+      themeSidebar.classList.remove('open');
+      themeArrowBtn.classList.remove('rotated');
+    }
+    function openSidebar() {
+      themeSidebar.classList.add('open');
+      themeArrowBtn.classList.add('rotated');
+    }
+    function toggleSidebar() {
+      if (themeSidebar.classList.contains('open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
+    }
+    themeArrowBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleSidebar();
+    });
+    // Close sidebar when clicking outside
+    window.addEventListener('click', (e) => {
+      if (
+        themeSidebar.classList.contains('open') &&
+        !themeSidebar.contains(e.target) &&
+        !themeArrowBtn.contains(e.target)
+      ) {
+        closeSidebar();
+      }
+    });
+    // Prevent click inside sidebar from closing it
+    themeSidebar.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+    // Theme toggle logic
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-theme');
+        localStorage.setItem('theme', body.classList.contains('light-theme') ? 'light' : 'dark');
+      });
+    }
+    // Restore theme on load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      body.classList.add('light-theme');
+    }
+    </script>
+
+    <!-- Anti-theft overlay -->
+    <div id="anti-theft-overlay" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100vw; height:100vh; background:#0a2342; color:#fff; text-align:center; justify-content:center; align-items:center; flex-direction:column;">
+      <img src="images/Screenshot 2025-06-09 200349.png" alt="Warning" style="max-width:300px; margin:30px auto;">
+      <h1 style="color:#fff; margin:20px 0;">SORRY BUT YOU CAN'T STEAL THIS MASTERPIECE</h1>
+      <h2 style="color:#ff4444;">DO HARDWORK YOURSELF</h2>
+      <p style="color:#fff; margin-top:20px;">Don't be angry and don't waste your time here<br>go back and watch my portfolio or get lost<br><br>– Prasidh P Shetty</p>
+    </div>
+    <script>
+    function showAntiTheftOverlay() {
+      document.getElementById('anti-theft-overlay').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    window.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      showAntiTheftOverlay();
+    });
+    window.addEventListener('keydown', function(e) {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+        (e.ctrlKey && (e.key === 'U' || e.key === 'S'))
+      ) {
+        e.preventDefault();
+        showAntiTheftOverlay();
+      }
+    });
+    let devtoolsOpen = false;
+    setInterval(function() {
+      const widthThreshold = window.outerWidth - window.innerWidth > 160;
+      const heightThreshold = window.outerHeight - window.innerHeight > 160;
+      if (widthThreshold || heightThreshold) {
+        if (!devtoolsOpen) {
+          devtoolsOpen = true;
+          showAntiTheftOverlay();
+        }
+      } else {
+        devtoolsOpen = false;
+      }
+    }, 500);
+    </script>
+</body>
+</html> 
